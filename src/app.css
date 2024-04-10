@@ -1,0 +1,144 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+	user-select: none;
+}
+
+/* CURRENT WAY: download various .woff, .woff2 files for Nunito and Poppins and reference them below */
+@font-face {
+	font-family: 'Nunito';
+	font-style: normal;
+	font-weight: 200;
+	src:
+		local(''),
+		url('/fonts/nunito-v25-latin-200.woff2') format('woff2'),
+		url('/fonts/nunito-v25-latin-200.woff') format('woff');
+}
+@font-face {
+	font-family: 'Nunito';
+	font-style: bold;
+	font-weight: 400;
+	src:
+		local(''),
+		url('/fonts/nunito-v25-latin-regular.woff2') format('woff2'),
+		url('/fonts/nunito-v25-latin-regular.woff') format('woff');
+}
+@font-face {
+	font-family: 'Poppins';
+	font-style: normal;
+	font-weight: 100;
+	src:
+		local(''),
+		url('/fonts/poppins-v20-latin-100.woff2') format('woff2'),
+		url('/fonts/poppins-v20-latin-100.woff') format('woff');
+}
+@font-face {
+	font-family: 'Poppins';
+	font-style: bold;
+	font-weight: 700;
+	src:
+		local(''),
+		url('/fonts/poppins-v20-latin-700.woff2') format('woff2'),
+		url('/fonts/poppins-v20-latin-700.woff') format('woff');
+}
+
+.dark.classroom {
+	--bg-color: black;
+}
+
+.dark {
+	--bg-color: #140d21;
+	--text-color: #f7f7f7;
+}
+
+/* html:not(.dark) { */
+html {
+	background-color: var(--bg-color, #f7f7f7);
+	color: var(--text-color, #140d21);
+	transition: background-color 0.1s ease;
+	scroll-behavior: smooth;
+	-webkit-tap-highlight-color: transparent;
+	/* user-select: none; */
+}
+
+/* this is fallback when the JS version of no-scroll (in utils.ts) fails; works for some browsers */
+body:has(.disableScrollOnThisPage) {
+	overflow: hidden;
+}
+
+/* now using an tailwind npm package for tailwind for this ... easier to invoke with breakpoints */
+/* Hide desktop horizontal scrollbar for navbar */
+.hideScrollBar::-webkit-scrollbar {
+	display: none;
+	/* .. for Chrome, Safari and Opera  */
+}
+
+.hideScrollBar {
+	-ms-overflow-style: none;
+	/* ...for IE and Edge */
+	scrollbar-width: none;
+	/* ....for Firefox */
+}
+
+/* Using tailwind css version instead of this. Pro: tailwind version has intellisense when hovering the code; Con: have to define the code here in the tailwind config file */
+.fadeInFromNone {
+	animation: fadeInFromNone 0.8s ease;
+}
+
+@keyframes fadeInFromNone {
+	0% {
+		display: none;
+		transform: scale(0) rotate(30deg);
+	}
+
+	100% {
+		display: block;
+		transform: scale(1) rotate(0deg);
+	}
+}
+
+.background-animate {
+	background-size: 800%;
+	animation: backgroundAnimate 10s infinite ease;
+	/* background-size: 400%;
+	animation: backgroundAnimate 4s infinite ease; */
+}
+
+@keyframes backgroundAnimate {
+	50% {
+		background-size: 100%;
+		/* background-size: 700%; */
+		background-position: right;
+	}
+}
+
+/* experimental: trying to replicate svelte's elastic transition without needing JS */
+
+.elasticOut {
+	/* animation: quarter-step 0.8s var(--easing) 0.2s; */
+	animation: quarter-step 0.8s var(--easing);
+	--easing: ease-in-out;
+	--displ: 5%;
+	--transform-default: translateY(0);
+	--transform-25: translateY(calc(-10 * var(--displ)));
+	--transform-50: translateY(calc(5 * var(--displ)));
+	--transform-75: translateY(calc(-2 * var(--displ)));
+}
+
+@keyframes quarter-step {
+	0%,
+	100% {
+		transform: var(--transform-default);
+	}
+	25% {
+		transform: var(--transform-25);
+	}
+	50% {
+		transform: var(--transform-50);
+	}
+	75% {
+		transform: var(--transform-75);
+	}
+}

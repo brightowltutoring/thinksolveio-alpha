@@ -1,0 +1,33 @@
+{
+	"exclude": [
+		// "src/**/old",
+		"**/*old*",
+		"**/*-old.*",
+		"**/*-test.*",
+		"src/**/*_old.*",
+		"src/**/*-old.*",
+		"src/**/old-*",
+		"src/**/old_*",
+		"src/**/*-test.*",
+		"src/**/*_test.*",
+		"src/**/test-*",
+		"src/**/test_*"
+	  ],
+	"extends": "./.svelte-kit/tsconfig.json",
+	"compilerOptions": {
+		"lib": ["esnext","dom", "webworker", "dom.iterable"],
+		"allowJs": true,
+		"checkJs": true,
+		"esModuleInterop": true,
+		"forceConsistentCasingInFileNames": true,
+		"resolveJsonModule": true,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true,
+		"allowImportingTsExtensions":true
+	
+	
+	}
+
+}
+
