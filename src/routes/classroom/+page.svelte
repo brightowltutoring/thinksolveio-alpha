@@ -1,7 +1,7 @@
 <script lang="ts">
 	import DamSon from '@/components/DamSon.svelte';
 	import JitsiUser from './JitsiUser.svelte';
-	let { isAdmin = false }: { isAdmin: boolean } = $props();
+	let { isAdmin = false } = $props();
 </script>
 
 <DamSon />

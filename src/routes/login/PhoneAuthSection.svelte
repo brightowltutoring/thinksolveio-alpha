@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { IconPhone } from '$src/components/icons';
+	import { IconPhone } from '@/components/icons';
 	import LoginButton from './LoginButton.svelte';
 	// import IconPhone from '$lib/Icons/LoginIcons/IconPhone.svelte';
 	import {
@@ -42,7 +42,7 @@
 	async function submitPhoneNumber(e: MouseEvent | KeyboardEvent) {
 		if (!phoneInputVisible) phoneInputValue$.set('');
 
-		let clickOrEnterFired = (<MouseEvent>e).type == 'click' || (<KeyboardEvent>e).key == 'Enter';
+		let clickOrEnterFired = (<MouseEvent>e).type === 'click' || (<KeyboardEvent>e).key === 'Enter';
 
 		if (clickOrEnterFired && phoneFieldValue === '') {
 			emptyPhoneInputAnimated = true;
@@ -73,7 +73,7 @@
 
 		if (<ClipboardEvent>e || <KeyboardEvent>e) {
 			isPhoneNumber = regexPhoneChecker(PHONE);
-			if (PHONE == '') {
+			if (PHONE === '') {
 				phoneField.style.border = '1px solid #aaa';
 				phoneField.style.color = '#aaa';
 				phoneField.style.fontSize = '16px';

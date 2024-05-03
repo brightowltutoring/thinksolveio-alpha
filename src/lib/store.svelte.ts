@@ -26,7 +26,7 @@ class DebouncedScrollY {
 	setterDebounced = debounce(() => this.setter(), 200);
 
 	constructor() {
-		if (typeof window == 'undefined') return;
+		if (typeof window === 'undefined') return;
 		window.addEventListener('scroll', this.setterDebounced);
 	}
 }

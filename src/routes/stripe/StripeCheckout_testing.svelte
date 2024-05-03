@@ -12,7 +12,7 @@
 
 	// console.log('incomplete_stripe_checkout ', incomplete_stripe_checkout);
 	// TODO: why doesnt this work?
-	// let showElement = $derived(stripeCheckoutUrl && incomplete_stripe_checkout == 'true' && dev);
+	// let showElement = $derived(stripeCheckoutUrl && incomplete_stripe_checkout === 'true' && dev);
 
 	// $inspect($page.url.pathname.includes('/plans'), incomplete_stripe_checkout, dev);
 	let showElement = $derived($page.url.pathname.includes('/plans') && stripeCheckoutUrl && dev);

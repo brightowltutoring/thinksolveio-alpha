@@ -1,7 +1,8 @@
 <script lang="ts">
 	// import FaqPage from '@/routes/faq/+page.svelte';
-	import { FaqPage } from '@/routes/index';
-	import Modal from '@/components/wrappers/Modal.svelte';
+	import { FaqPage } from '@/routes/';
+	// import Modal from '@/components/wrappers/Modal.svelte';
+	import { Modal } from '@/components/wrappers/';
 
 	import { scale } from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
@@ -24,7 +25,7 @@
 		} else if (e.target === emailText) {
 			contactLinkModalOpen = true;
 			clearTimeout(contactLinkTimeout);
-		} else if (e.target !== e.currentTarget || (e as KeyboardEvent).key == 'Escape') {
+		} else if (e.target !== e.currentTarget || (e as KeyboardEvent).key === 'Escape') {
 			contactLinkModalOpen = false;
 			clearTimeout(contactLinkTimeout);
 		}

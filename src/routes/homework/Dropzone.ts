@@ -1,8 +1,12 @@
 import { dev } from '$app/environment';
 import Dropzone, { type DropzoneFile, type DropzoneOptions } from 'dropzone';
 import { PUBLIC_UPLOAD_ENDPOINT } from '$env/static/public';
-import { modals } from '@/components/root/Navbar.svelte'; // '@/shared/modalsStore.svelte';
+import { modals } from '@/components/root/';
+// import { modals } from '@/components/root/Navbar.svelte';
+
+// WIP?
 import { get, writable } from 'svelte/store';
+
 
 const popUpOnceBoolean$ = writable(false);
 const submitOnce$ = writable(false);
@@ -54,7 +58,7 @@ async function handleErroredUploads(DROPZONE_INSTANCE: Dropzone) {
 			}
 
 			// reset collected files array when done
-			filesToRetry.length == 0;
+			filesToRetry.length === 0;
 		});
 	} catch (error) {
 		console.log('error', error);

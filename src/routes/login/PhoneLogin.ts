@@ -19,7 +19,7 @@ export async function generateRecaptchaVerifier(RECAPTCHA_CONTAINER_ID: string) 
 		RECAPTCHA_CONTAINER_ID,
 		{
 			size: 'invisible',
-			callback: (response: any) => {}
+			callback: (response: any) => { }
 		},
 		auth
 	);
@@ -50,7 +50,7 @@ export async function sendCodeToPhone(PHONE_NUMBER: string, RECAPTCHA_VERIFIER: 
 }
 
 // export function verifySMSCode(SMS_CODE, e) {
-// let clickOrEnterFired = e.type == "click" || e.key == "Enter";
+// let clickOrEnterFired = e.type === "click" || e.key === "Enter";
 export function verifySMSCode(e: ClipboardEvent | KeyboardEvent, SMS_CODE: string) {
 	if (e instanceof ClipboardEvent || e instanceof KeyboardEvent) {
 		let code = SMS_CODE;

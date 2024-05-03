@@ -36,7 +36,7 @@
 			}
 		};
 		function _close(event: KeyboardEvent | MouseEvent) {
-			if (event.target === event.currentTarget || (event as KeyboardEvent).key == 'Escape') {
+			if (event.target === event.currentTarget || (event as KeyboardEvent).key === 'Escape') {
 				close();
 			}
 		}

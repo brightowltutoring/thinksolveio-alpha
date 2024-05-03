@@ -1,5 +1,6 @@
 <script context="module" lang="ts">
-	import { iframeModals } from '@/routes/plans/PlansButton.svelte';
+	import { iframeModals } from '@/components/root';
+	// import { iframeModals } from '@/routes/plans/PlansButton.svelte';
 
 	import type { loadStatus } from '@/utils/types'; // type loadStatus = null | 'pending' | 'success' | 'fail';
 

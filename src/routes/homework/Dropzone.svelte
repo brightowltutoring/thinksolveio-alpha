@@ -6,9 +6,11 @@
 	} = $props();
 
 	import './dropzone.css';
-	import IconUploadGradient from '$src/components/icons/IconUploadGradient.svelte';
-	import { modals } from '@/components/root/Navbar.svelte'; //'@/shared/modalsStore';
-	import { useInView } from '@/utils/utils';
+	import { IconUploadGradient } from '@/components/icons/';
+
+	import { modals } from '@/components/root/';
+
+	import { useInView } from '@/utils/';
 	import {
 		dropzonePopUpOnce,
 		getIframeSrcAndPostDummyOnce,

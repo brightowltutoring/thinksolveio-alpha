@@ -13,7 +13,7 @@
 	};
 </script>
 
-{#if loading == 'pending'}
+{#if loading === 'pending'}
 	{#if typeof fallback === 'string'}
 		{fallback}
 	{:else if fallback}
@@ -24,7 +24,7 @@
 {/if}
 
 <div
-	class:fly-fade={loading == 'success'}
+	class:fly-fade={loading === 'success'}
 	class="absolute -bottom-20 z-50 flex h-[90%] w-full items-center justify-center rounded-xl border-dotted border-gray-500 opacity-0 backdrop-blur-3xl ease-in md:top-40 md:h-full md:w-[80%]"
 >
 	{@render children()}

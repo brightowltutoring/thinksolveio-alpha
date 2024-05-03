@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { getIsDarkMode, setDarkMode } from '@/components/root/Theme.svelte';
+	import { getIsDarkMode, setDarkMode } from '@/components/root/';
+	// import { getIsDarkMode, setDarkMode } from '@/components/root/Theme.svelte';
 	import './ssr_friendly_external_api';
 	import EnableJavascript from '@/components/EnableJavascript.svelte';
 	import { onMount } from 'svelte';

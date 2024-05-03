@@ -8,13 +8,10 @@
 	} = $props();
 
 	import type { payButton } from './plansCardStuff';
-	// import Modal from '@/components/wrappers/Modal.svelte';
-	// import Suspense from '@/components/wrappers/Suspense.svelte';
-	import { Modal, Suspense } from '@/components/wrappers/index';
+	import type { loadStatus } from '@/utils/';
+	import { Modal, Suspense } from '@/components/wrappers/';
 
-	import StripeCheckout from '$routes/stripe/StripeCheckout.svelte';
-
-	import type { loadStatus } from '@/utils/types';
+	import StripeCheckout from '@/routes/stripe/StripeCheckout.svelte';
 
 	let iframe: HTMLIFrameElement;
 

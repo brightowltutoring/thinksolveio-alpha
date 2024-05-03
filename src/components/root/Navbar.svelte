@@ -1,36 +1,35 @@
 <script context="module">
-	import { exclusive } from '@/utils';
+	import { exclusive } from '@/utils/';
 	// import { exclusive } from '@/utils/utils.svelte';
 	export const modals = exclusive(['homework', 'contactLink', 'navApp', 'login']);
 </script>
 
 <script lang="ts">
-	let { data } = $page;
-
-	import Theme, { getIsDarkMode } from '@/components/root/Theme.svelte';
-
 	import LoginCard, { getIsLoggedIn } from '@/routes/login/+page.svelte';
-
 	import Dropzone from '@/routes/homework/Dropzone.svelte';
-
 	import Modal from '@/components/wrappers/Modal.svelte';
-	import { debouncedScrollY } from '@/shared/scrollStore.svelte.ts';
 	import { scale, fly } from 'svelte/transition';
 	import { elasticOut, quintOut } from 'svelte/easing';
 	import { routes } from '@/shared/routesStore.svelte.ts';
 	import { spring } from 'svelte/motion';
-	import { navigating, page } from '$app/stores';
-	import { getVelY, longpress } from '@/utils/utils';
+	import { page } from '$app/stores';
+	import { getVelY } from '@/utils/utils';
+	import { onNavigate } from '$app/navigation';
 
-	import { beforeNavigate, onNavigate } from '$app/navigation';
+	import { Theme, getIsDarkMode, getDebouncedScrollY } from '@/components/root/';
 
+	let { data } = $page;
+
+	let debouncedScrollY = $derived(getDebouncedScrollY());
+
+	// in case I want to use regular scrollY later ... testing
+	let scrollY = $derived(debouncedScrollY);
 	let isLoggedIn = $derived(getIsLoggedIn());
-	let scrollY = $derived(debouncedScrollY.value);
+
 	let velY = $derived(getVelY(scrollY));
 
 	let showHideNavFn = $derived.by(() => {
 		if (scrollY < 10) {
-			console.log('one');
 			return 'bottom-0 md:top-0 backdrop-blur-3xl md:backdrop-blur-none';
 		}
 
@@ -44,14 +43,6 @@
 			return '';
 		}
 	});
-
-	// let hueRocket = $derived.by(() => {
-	// 	if (isLoggedIn && (data.isPWA === false || null)) {
-	// 		return getIsDarkMode() ? 0.75 : 0;
-	// 	} else {
-	// 		return 0;
-	// 	}
-	// });
 
 	let hueRocket = $state(0);
 	let scaleRocket = spring(1, { stiffness: 0.1, damping: 0.25 });
@@ -77,10 +68,6 @@
 	let showLoader = $state(false);
 	let showLoaderTimeout: NodeJS.Timeout;
 
-	// $effect(() => {
-
-	// TODO: which is better?
-	// beforeNavigate(({ from, to }) => {
 	onNavigate(({ from, to }) => {
 		if (from?.route.id === to?.route.id) return;
 
@@ -92,16 +79,10 @@
 
 	const routes_for_navbar = $derived(
 		Object.values(routes)
-			// .slice(1, 5) //'login', 'plans', 'homework', 'classroom'
 			.filter(({ name }) =>
 				['login', 'plans', 'homework', 'classroom', 'contact'].includes(name.toLowerCase())
 			)
-			// .map(({ routePath, name, icon }) => {
 			.map(({ routePath, name, icon }) => {
-				// Object.keys(routes)
-				// 	.filter((key) => ['login', 'plans', 'homework', 'classroom'].includes(key))
-				// 	.map((key) => {
-				// 		let { routePath, name, icon } = routes[key];
 				let rocketStyle =
 					routePath === '/login' && isLoggedIn
 						? `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`
@@ -129,73 +110,26 @@
 				};
 			})
 	);
-
-	// const routes_for_navbar = $derived(
-	// 	Object.values(routes)
-	// 		.slice(1, 5)
-	// 		.map((val) => {
-	// 			const { routePath, name, icon } = val;
-
-	// 			let rocketStyle =
-	// 				routePath === '/login' && isLoggedIn
-	// 					? `transform:scale(${$scaleRocket}); filter:hue-rotate(${hueRocket}turn)`
-	// 					: undefined;
-
-	// 			let navIconClicked =
-	// 				(routePath === '/homework' && modals.homework) ||
-	// 				(routePath === '/login' && modals.contactLink);
-
-	// 			const onclick =
-	// 				routePath === '/homework' || routePath === '/login'
-	// 					? (e: MouseEvent | KeyboardEvent) => {
-	// 							e.preventDefault();
-	// 							modals.open(routePath.substring(1) as 'login' | 'homework');
-	// 						}
-	// 					: undefined;
-
-	// 			return {
-	// 				routePath,
-	// 				name,
-	// 				icon,
-	// 				navIconClicked,
-	// 				onclick,
-	// 				rocketStyle
-	// 			};
-	// 		})
-	// );
 </script>
 
-<nav class={showHideNavFn}>
+<nav class="{showHideNavFn} backdrop-blur-xl">
 	<span
 		class="absolute bottom-0 left-0 h-[4px] w-full sm:top-0 {showLoader && 'loader-bar-fireship'} "
-	/>
+	></span>
 
 	{#key resetLogoClick}
-		<!-- href="/#step2" -->
 		<a
 			href="/"
 			class="logo scale-75"
 			in:scale={{ duration: 1200, easing: elasticOut }}
 			onclick={clickLogo}
 		>
-			<!-- use:longpress={{
-				// up: () => {
-				// 	console.log('up');
-				// 	goto('/');
-				// },
-				down: () => {
-					console.log('down');
-					// onNavigate(() => {
-					goto('/');
-					// });
-					// goto('/');
-				}
-			}} -->
 			🚀
 		</a>
 	{/key}
 
-	<ul class="background-animate">
+	<!-- <ul class="background-animate pause-animation"> -->
+	<ul class="background-animate hover:![animation-play-state:paused]">
 		<li class={data.isIOS ? 'block pwa:hidden' : 'hidden'}>
 			<button class="app_button" onclick={() => modals.open('navApp')}> App </button>
 		</li>
@@ -209,8 +143,6 @@
 					</div>
 
 					<div class="text-2xl md:text-xl pwa:hidden">{name}</div>
-
-					<!-- <div class="text-2xl md:text-xl">{name}</div> -->
 				</a>
 			</li>
 		{/each}
@@ -260,7 +192,6 @@
 		<LoginCard />
 	</Modal>
 
-	<!-- transitionsOff -->
 	<Modal body isOpen={modals.homework} close={modals.closeAll} class={'bg-[rgba(0,0,0,0.1)]'}>
 		<Dropzone
 			textSizeTW={'text-6xl'}
@@ -276,22 +207,9 @@
 
 		@apply pwa:bottom-0 pwa:translate-y-0 pwa:pt-1;
 	}
-	nav li > a {
-		@apply block px-2 py-1 font-Nunito font-thin duration-100 ease-in hover:rounded hover:bg-red-300;
-		/* notpwa:hover:bg-red-300 */
-		:global(html.dark) & {
-			@apply hover:bg-indigo-400;
-		}
-	}
-	.logo {
-		@apply hidden p-2 font-Poppins text-xl transition-transform selection:bg-transparent hover:scale-110
-			active:text-red-600 md:block md:translate-x-3 md:translate-y-[0.1rem] md:text-[min(5.5vw,40px)];
-	}
-	.app_button {
-		@apply rounded border-b-2 px-3 py-1 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:bg-indigo-400 hover:text-white hover:shadow-lg active:animate-pulse md:text-xl;
-	}
 	nav ul {
-		@apply grid w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200 text-xl scrollbar-hide  md:ml-24 md:w-auto md:rounded-xl;
+		/* hover:bg-none  */
+		@apply grid  w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r  from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200  text-xl scrollbar-hide   md:ml-24 md:w-auto md:rounded-xl;
 
 		@apply pwa:m-0 pwa:pb-0;
 		:global(html.dark) & {
@@ -299,6 +217,30 @@
 		}
 		/* @apply dark:to-[#25235b]; */
 	}
+	nav li > a {
+		@apply block px-2 py-1 font-Nunito font-thin duration-100 ease-in hover:rounded hover:bg-red-300/25;
+
+		/* hover:text-red-700 */
+		/* notpwa:hover:bg-red-300 */
+		:global(html.dark) & {
+			@apply hover:bg-indigo-500/15;
+		}
+	}
+	/* nav li > a {
+		@apply block px-2 py-1 font-Nunito font-thin duration-100 ease-in hover:rounded hover:bg-red-300;
+
+		:global(html.dark) & {
+			@apply hover:bg-indigo-400;
+		}
+	} */
+	.logo {
+		@apply hidden p-2 font-Poppins text-xl transition-transform selection:bg-transparent hover:scale-110
+			active:text-red-600 md:block md:translate-x-3 md:translate-y-[0.1rem] md:text-[min(5.5vw,40px)];
+	}
+	.app_button {
+		@apply rounded border-b-2 px-3 py-1 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:bg-indigo-400 hover:text-white hover:shadow-lg active:animate-pulse md:text-xl;
+	}
+
 	.loader-bar-fireship {
 		--gradient-from: #f97316;
 		--gradient-via: #a855f7;

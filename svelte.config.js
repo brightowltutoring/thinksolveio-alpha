@@ -2,22 +2,21 @@ import adapter from '@sveltejs/adapter-auto';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
-const config = {
+// const config = {
+export default {
 	extensions: ['.svelte'],
 	kit: {
 		adapter: adapter(),
-
 		alias: {
-			$routes: 'src/routes',
-			$src: 'src',
-			'@': './src/*' // thanks pheralb!
+			'@': './src/*',
+			$routes: './src/routes',
+			$src: './src'
 		}
 	},
-	vitePlugin: {
-		inspector: true
-	},
-
 	preprocess: [vitePreprocess()]
+	// vitePlugin: {
+	// 	inspector: true
+	// },
 };
 
-export default config;
+// export default config;

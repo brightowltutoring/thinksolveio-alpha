@@ -1,18 +1,25 @@
 <script lang="ts">
-	import { debouncedScrollY } from '@/shared/scrollStore.svelte';
-
-	let { title = '', name = '', date = '', children } = $props();
-
-	import { spring } from 'svelte/motion';
 	import type { Snippet } from 'svelte';
-	import { getIsDarkMode } from '$src/components/root/Theme.svelte';
+	type Props = {
+		title: string;
+		name: string;
+		date: string;
+		children: Snippet;
+	};
+	let { title = '', name = '', date = '', children }: Props = $props();
 
+	import { getIsDarkMode, getDebouncedScrollY } from '@/components/root/';
+	// import { getIsDarkMode } from '@/components/root/Theme.svelte';
+	// import { getDebouncedScrollY } from '@/components/root/DebouncedScrollY.svelte';
+	import { spring } from 'svelte/motion';
+
+	const debouncedScrollY = $derived(getDebouncedScrollY());
 	const ORIGINAL_SPRING_VALUE = 0;
 	const sineSpring = spring(ORIGINAL_SPRING_VALUE);
 
 	$effect(() => {
 		if (getIsDarkMode()) {
-			sineSpring.set(0.3 * Math.sin(debouncedScrollY.value), { soft: 1 });
+			sineSpring.set(0.3 * Math.sin(debouncedScrollY), { soft: 1 });
 		}
 	});
 </script>
@@ -39,7 +46,7 @@
 
 		<div class="py-3">
 			<!-- <slot /> -->
-			{@render (children as Snippet)()}
+			{@render children?.()}
 		</div>
 
 		<div class="absolute bottom-0 right-0 -my-10 mx-5 py-3 font-bold">

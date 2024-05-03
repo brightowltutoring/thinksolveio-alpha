@@ -6,20 +6,71 @@ import { get, type Readable } from 'svelte/store';
 export const is_client = typeof window !== 'undefined'; // framework agnostic version of 'browser'
 
 
+export function createContext<T>(state_creator?: () => T) {
+	const key = Symbol();
 
-// context creator ... simplifies
-export function CtxSolid() {
-	let _key = Symbol();
+	const consumer = () => getContext(key) as T
 
-	function set(val: any) {
-		setContext(_key, val);
-	}
-	function get() {
-		return getContext(_key);
-	}
+	const provider = state_creator
+		? () => setContext(key, state_creator())
+		: (v?: T) => setContext(key, v) as T
 
-	return [() => get(), (v: any) => set(v)]
+
+	// let provider = (v?: T) => setContext(key, v) as T
+
+	// if (state_creator) {
+	// 	provider = () => setContext(key, state_creator())
+	// }
+
+	return [provider, consumer]
 }
+
+//TODO: BROKEN
+// function createContextWIP<T>(state_creator: () => T|undefined = ()=>undefined) {
+// export function createContext<T>(state_creator?: () => T) {
+// 	const key = Symbol();
+// 	const consumer = () => getContext(key) as T
+
+// 	const provider = state_creator
+// 		? () => setContext(key, state_creator)
+// 		: (v: T) => setContext(key, v)
+
+// 	return [() => provider, () => consumer] as [() => T, () => T]
+// 	// return [provider, consumer] as [() => T, () => T]
+// 	// return [provider, consumer] as (T)[]
+// }
+//TODO: BROKEN
+
+// export function createContext<T>(state_creator?: T) {
+// 	if (state_creator) {
+// 		return createContextFn<T>(() => state_creator) as (T)[]
+// 	}
+// 	else {
+// 		return createContextClassic<T>() as (T)[]
+// 	}
+// }
+
+
+export function createContextFn<T>(state_creator: () => T) {
+	const key = Symbol();
+
+	const consumer = () => getContext(key) as T
+	const provider = () => setContext(key, state_creator())
+
+	return [provider, consumer]
+}
+
+
+export function createContextClassic<T>() {
+	let key = Symbol();
+
+	const consumer = () => getContext(key) as T
+	const provider = (v: T) => setContext(key, v)
+
+	return [provider, consumer]
+}
+
+
 
 // to be used in the root (i.e. +layout.svelte)
 import { onNavigate } from '$app/navigation';
@@ -410,7 +461,7 @@ export async function sendDummyTextFileToGoogleDrive(name: string) {
 // 	return new Promise((res) => {
 // 		const callback = (records) => {
 // 			records[0].addedNodes.forEach((node) => {
-// 				if (node.nodeType == 1 && node.matches(selector)) {
+// 				if (node.nodeType === 1 && node.matches(selector)) {
 // 					res(node);
 // 					observer.disconnect();
 // 				}

@@ -1,7 +1,8 @@
 <script lang="ts">
 	let { closemodal }: { closemodal: () => void } = $props();
 
-	import { modals } from '@/components/root/Navbar.svelte'; //'@/shared/modalsStore';
+	// import { modals } from '@/components/root/Navbar.svelte';
+	import { modals } from '@/components/root/';
 	import { onMount } from 'svelte';
 	import { quintOut } from 'svelte/easing';
 	import { fade, fly } from 'svelte/transition';
@@ -15,7 +16,7 @@
 		// using 'event delegation'
 		faqContainer.addEventListener('click', (event) => {
 			let target = event.target as HTMLElement;
-			if (target.tagName == 'A' || target.tagName == 'BUTTON') {
+			if (target.tagName === 'A' || target.tagName === 'BUTTON') {
 				// dispatch('closeFaqModal');
 				closemodal();
 			}

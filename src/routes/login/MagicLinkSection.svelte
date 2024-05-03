@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { IconEmail } from '$src/components/icons';
+	import { IconEmail } from '@/components/icons';
 	import LoginButton from './LoginButton.svelte';
 	import { emailInputValue$, magicLinkToEmail, regexEmailChecker } from './magicLinkLogin';
 	import type { EmailType } from './magicLinkLogin';
@@ -58,7 +58,7 @@
 		if (EMAIL === undefined) return;
 
 		isEmail = regexEmailChecker(EMAIL);
-		if (EMAIL == '') {
+		if (EMAIL === '') {
 			emailField.style.border = '1px solid #aaa';
 			emailField.style.color = '#aaa';
 			emailField.style.fontSize = '16px';

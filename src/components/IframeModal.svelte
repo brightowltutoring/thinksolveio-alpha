@@ -12,7 +12,7 @@
 
 	// import Modal from '@/components/wrappers/Modal.svelte';
 	// import Suspense from '@/components/wrappers/Suspense.svelte';
-	import { Modal, Suspense } from '@/components/wrappers/index';
+	import { Modal, Suspense } from '@/components/wrappers/';
 
 	let { iframe }: { iframe: iframeModalType } = $props();
 

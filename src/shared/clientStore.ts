@@ -14,8 +14,8 @@ type valueType = string | boolean | undefined;
 declare type Updater<T> = (value: T) => T;
 
 export function browserStore(key: string, value: valueType, type: StorageType = 'session') {
-	if (typeof window == 'undefined') return;
-	if (value == undefined) return; // just so that i can have this code not set browser storage
+	if (typeof window === 'undefined') return;
+	if (value === undefined) return; // just so that i can have this code not set browser storage
 
 	const browserStorage = type === 'session' ? sessionStorage : localStorage;
 

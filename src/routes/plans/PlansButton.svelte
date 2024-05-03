@@ -1,11 +1,6 @@
-<script lang="ts" context="module">
-	import type { iframeModalType } from '@/components/root/IframeModals.svelte';
-	import type { payButton } from './plansCardStuff';
-
-	export const iframeModals: iframeModalType[] = $state([]);
-</script>
-
 <script lang="ts">
+	import type { payButton } from './plansCardStuff';
+	import { iframeModals } from '@/components/root';
 	let { button, class: _class }: { button: payButton; class: string } = $props();
 
 	let thisIndex = $derived(iframeModals.findIndex((el) => el.url === button.url));
@@ -40,6 +35,3 @@
 >
 	<span>{button.text}</span>
 </a>
-
-<!-- bg-[#AF1433] dark:brightness-200 -->
-<!-- bg-[#353DD9] dark:brightness-200 -->

@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<!-- <script context="module" lang="ts">
 	export type iframeModalType = {
 		url: string;
 		isOpen: boolean;
@@ -8,11 +8,12 @@
 </script>
 
 <script lang="ts">
-	import type { loadStatus } from '@/utils/types';
+	console.log('ey');
+	import type { loadStatus } from '@/utils';
 
-	// import Modal from '@/components/wrappers/Modal.svelte';
-	// import Suspense from '@/components/wrappers/Suspense.svelte';
-	import { Modal, Suspense } from '@/components/wrappers';
+	import Modal from '@/components/wrappers/Modal.svelte';
+	import Suspense from '@/components/wrappers/Suspense.svelte';
+	// import { Modal, Suspense } from '@/components/wrappers';
 
 	let { iframe }: { iframe: iframeModalType } = $props();
 
@@ -41,6 +42,7 @@
 >
 	<Suspense loading={iframe.loading}>
 		<iframe class="h-full w-full" use:load_iframe={iframe} src={iframe.url} title={iframe.name} />
-		<!-- <iframe class="h-full w-full" use:load_iframe src={iframe.url} title={iframe.name} /> -->
 	</Suspense>
-</Modal>
+</Modal> -->
+
+<!-- <iframe class="h-full w-full" use:load_iframe src={iframe.url} title={iframe.name} /> -->

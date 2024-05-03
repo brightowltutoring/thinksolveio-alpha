@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { reviews } from './reviews';
 	import ReviewCreator from './ReviewCreator.svelte';
-	import { mod } from '$src/utils'; // math version of modulo .. javascript version is weird
+	import { mod } from '@/utils/'; // math version of modulo .. javascript version is weird
 
 	// for creating union type ('left'| 'right'); this array is useful in its own right as well
 	const toArray = ['left', 'right'] as const;
@@ -51,10 +51,10 @@
 						href={`#card_${mod(index + (to === 'right' ? 1 : -1), reviewsLength)}`}
 						onclick={(e) => horizScroll(e, index, to)}
 						aria-label="{to} horizontal scroll to next review card"
-						class="absolute top-0 z-10 h-full w-16 rounded-full {to == 'left'
+						class="absolute top-0 z-10 h-full w-16 rounded-full {to === 'left'
 							? 'left-0'
 							: 'right-0'}"
-					/>
+					></a>
 				{/each}
 
 				<ReviewCreator {title} {name} {date}>

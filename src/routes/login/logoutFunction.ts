@@ -1,5 +1,6 @@
-// import { modals } from '$lib/store/modalsStore';
-import { modals } from '@/components/root/Navbar.svelte'; //'@/shared/modalsStore.svelte';
+
+import { modals } from '@/components/root/'
+// import { modals } from '@/components/root/Navbar.svelte'
 
 export async function logoutFunction() {
 	const [{ auth }, { signOut }] = await Promise.all([

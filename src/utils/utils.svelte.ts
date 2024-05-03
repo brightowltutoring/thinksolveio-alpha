@@ -1,8 +1,77 @@
 import { setContext, getContext, untrack } from 'svelte';
-export class Ctx {
+// function isString(val: any) {
+// 	return typeof val === 'string'
+// }
+
+export function inview(
+	node_or_selector: Element | string,
+	args: {
+		options?: IntersectionObserverInit,
+		once?: boolean,
+		enter?: (target: Element) => void,
+		leave?: (target: Element) => void,
+		deps?: () => boolean | any
+	}) {
+
+	// deps() added to avoid mutation observer in vanilla case
+	let { options, once, enter, leave, deps = () => true } = { ...args }
+
+
+	let observer = new IntersectionObserver(handler, options)
+
+
+	$effect(() => {
+		// let targets: Element[]
+		// if (typeof node_or_selector === 'string') {
+		// 	targets = deps() && Array.from(document.querySelectorAll(node_or_selector as string))
+		// }
+		// else {
+		// 	targets = [node_or_selector as Element];
+
+		// }
+
+		const targets: Element[] = typeof node_or_selector === 'string'
+			? deps() && document.querySelectorAll(node_or_selector as string)
+			: [node_or_selector as Element];
+
+		targets.forEach((t) => observer.observe(t))
+
+		// return () => {
+		// 	targets.forEach(t => observer.unobserve(t))
+		// }
+	});
+
+
+
+	function handler(entries: IntersectionObserverEntry[], observer: IntersectionObserver) {
+		for (let e of entries) {
+			const target = e.target
+			if (e.isIntersecting) {
+				if (enter) {
+					enter(target)
+					once && observer.unobserve(target);
+					return
+				}
+				console.log('default enter')
+			}
+			else {
+				if (leave) {
+					leave(target)
+					return
+				}
+				console.log('default leave')
+			}
+
+		}
+	}
+}
+
+
+
+export class Ctx<T> {
 	#key = Symbol();
-	get = () => getContext(this.#key);
-	set = (val: any) => setContext(this.#key, val);
+	set = (val: T) => setContext(this.#key, val);
+	get = () => getContext(this.#key) as T
 }
 
 // useful for modals; boolean 'status' not write-able (no setter)

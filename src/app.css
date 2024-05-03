@@ -1,3 +1,4 @@
+/* @import 'tailwindcss'; */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -102,43 +103,13 @@ body:has(.disableScrollOnThisPage) {
 .background-animate {
 	background-size: 800%;
 	animation: backgroundAnimate 10s infinite ease;
-	/* background-size: 400%;
-	animation: backgroundAnimate 4s infinite ease; */
 }
 
 @keyframes backgroundAnimate {
 	50% {
 		background-size: 100%;
-		/* background-size: 700%; */
 		background-position: right;
 	}
 }
 
 /* experimental: trying to replicate svelte's elastic transition without needing JS */
-
-.elasticOut {
-	/* animation: quarter-step 0.8s var(--easing) 0.2s; */
-	animation: quarter-step 0.8s var(--easing);
-	--easing: ease-in-out;
-	--displ: 5%;
-	--transform-default: translateY(0);
-	--transform-25: translateY(calc(-10 * var(--displ)));
-	--transform-50: translateY(calc(5 * var(--displ)));
-	--transform-75: translateY(calc(-2 * var(--displ)));
-}
-
-@keyframes quarter-step {
-	0%,
-	100% {
-		transform: var(--transform-default);
-	}
-	25% {
-		transform: var(--transform-25);
-	}
-	50% {
-		transform: var(--transform-50);
-	}
-	75% {
-		transform: var(--transform-75);
-	}
-}

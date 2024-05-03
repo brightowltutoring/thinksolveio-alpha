@@ -1,12 +1,10 @@
 <script context="module" lang="ts">
-	// import { iframeModals } from '@/routes/plans/PlansCard.svelte';  //TODO:test
-	import { iframeModals } from '@/routes/plans/PlansButton.svelte';
+	// store or pass via context?
+	export const iframeModals: iframeModalType[] = $state([]);
 
-	import type { loadStatus } from '@/utils/types'; // type loadStatus = null | 'pending' | 'success' | 'fail';
+	import type { loadStatus } from '@/utils/'; // type loadStatus = null | 'pending' | 'success' | 'fail';
 
-	// import Modal from '@/components/wrappers/Modal.svelte';
-	// import Suspense from '@/components/wrappers/Suspense.svelte';
-	import { Modal, Suspense } from '@/components/wrappers';
+	import { Modal, Suspense } from '@/components/wrappers/';
 
 	export type iframeModalType = {
 		url: string;

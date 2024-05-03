@@ -1,5 +1,5 @@
 <script>
-	import { IconTwitter } from '$src/components/icons';
+	import { IconTwitter } from '@/components/icons';
 	import { isDarkMode } from '@/shared/clientStore'; //TODO: old
 	import { twitterLogin } from './twitterLogin';
 </script>

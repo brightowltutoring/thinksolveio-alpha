@@ -3,20 +3,15 @@
 </script>
 
 <script lang="ts">
-	import BackgroundVideo from '@/components/BackgroundVideo.svelte';
-
-	import { HomeworkPage, PlansPage } from '..';
-	// import HomeworkPage from '@/routes/homework/+page.svelte';
-	// import PlansPage from '@/routes/plans/+page.svelte';
-
-	import HorizontalScrollReviews from '../reviews/HorizontalScrollReviews.svelte';
-	import Reviews from '../reviews/Reviews.svelte';
-	import { sleep } from '@/utils/utils';
 	import { browser, dev } from '$app/environment';
+	import { BackgroundVideo } from '@/components/';
+	import { HomeworkPage, PlansPage, ReviewsPage } from '@/routes/';
+	// import ReviewsPage from '@/routes/reviews/Reviews.svelte';
+	import { sleep } from '@/utils/';
 
-	// If js is enabled then 'elasticOut' animation will play once.
+	// If js is enabled then 'elastic-out' animation will play once.
 	// With JS disabled the css animation plays on every navigation to this route .. which is superior to svelte js animation (doesnt work without js)
-	if (browser && prevTimesMounted == 0) {
+	if (browser && prevTimesMounted === 0) {
 		sleep(1000) // required to not cut off the animation prematurely
 			.then(() => prevTimesMounted++);
 	}
@@ -24,31 +19,15 @@
 
 <main class="group">
 	<BackgroundVideo class="transition-transform duration-[2s] pwa:group-active:scale-[0.5]" />
-	<!-- this section visible in pwa -->
-	<section class="hidden pwa:block">
-		<a
-			href="/plans"
-			class="flex h-[100vh] items-center justify-center text-center"
-			style="position: fixed; top: 0;"
-		>
-			<div class="elasticOut z-10 grid grid-rows-1">
-				<div class="pb-4 font-Poppins text-6xl">
-					You're on the <span class="gradientTextColor"> App!</span>
-				</div>
 
-				<div class="grid px-6 font-Nunito text-2xl font-thin">the navbar is now your friend 🤝</div>
-			</div>
-		</a>
-	</section>
-
-	<!-- this section visible in notpwa -->
-	<section class="block pwa:hidden">
+	<!-- this section visible in NOT display-mode:standalone  -->
+	<regular-section class="block pwa:hidden">
 		<div class="pwa grid grid-cols-1 gap-y-52 lg:gap-y-64">
 			<a href="#step1" class=" z-10 flex h-[60vh] items-center justify-center text-center">
 				<!-- annoyingly have to add z-10 since background video interferes with the svelte transitioned text in this section -->
 
-				<!-- <div class:disable_animation={prevTimesMounted > 0} class="elasticOut grid grid-rows-1"> -->
-				<div class:elasticOut={prevTimesMounted == 0} class="grid grid-rows-1">
+				<!-- <div class:disable_animation={prevTimesMounted > 0} class="elastic-out grid grid-rows-1"> -->
+				<div class:elastic-out={prevTimesMounted === 0} class="grid grid-rows-1">
 					<div class="pb-4 font-Poppins text-6xl">
 						{dev ? 'Demo' : ' Math, Physics'}
 
@@ -88,10 +67,27 @@
 					>
 				</a>
 
-				<Reviews />
+				<ReviewsPage />
 			</section>
 		</div>
-	</section>
+	</regular-section>
+
+	<!-- this section visible in display-mode:standalone  -->
+	<pwa-section class="hidden pwa:block">
+		<a
+			href="/plans"
+			class="flex h-[100vh] items-center justify-center text-center"
+			style="position: fixed; top: 0;"
+		>
+			<div class="elastic-out z-10 grid grid-rows-1">
+				<div class="pb-4 font-Poppins text-6xl">
+					You're on the <span class="gradientTextColor"> App!</span>
+				</div>
+
+				<div class="grid px-6 font-Nunito text-2xl font-thin">the navbar is now your friend 🤝</div>
+			</div>
+		</a>
+	</pwa-section>
 </main>
 
 <!-- <Schools /> -->
@@ -102,6 +98,34 @@
 		@apply bg-gradient-to-tr from-indigo-600 to-black bg-clip-text text-transparent;
 		:global(html.dark) & {
 			@apply from-red-300 via-white to-white;
+		}
+	}
+
+	/* moved from app.css to here, since only used here */
+	.elastic-out {
+		/* animation: quarter-step 0.8s var(--easing) 0.2s; */
+		animation: quarter-step 0.8s var(--easing);
+		--easing: ease-in-out;
+		--displ: 5%;
+		--transform-default: translateY(0);
+		--transform-25: translateY(calc(-10 * var(--displ)));
+		--transform-50: translateY(calc(5 * var(--displ)));
+		--transform-75: translateY(calc(-2 * var(--displ)));
+	}
+
+	@keyframes quarter-step {
+		0%,
+		100% {
+			transform: var(--transform-default);
+		}
+		25% {
+			transform: var(--transform-25);
+		}
+		50% {
+			transform: var(--transform-50);
+		}
+		75% {
+			transform: var(--transform-75);
 		}
 	}
 </style>

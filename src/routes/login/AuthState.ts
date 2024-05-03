@@ -1,4 +1,5 @@
-import { modals } from '@/components/Navbar'; //'@/components/Navbar.svelte' //'@/shared/modalsStore';
+import { modals } from '@/components/root/';
+// import { modals } from '@/components/root/Navbar.svelte';
 import { cookeh, subscribe$ } from '@/utils/utils';
 import { page } from '$app/stores';
 

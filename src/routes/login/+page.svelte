@@ -12,12 +12,11 @@
 	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
-	import { modals } from '@/components/root/Navbar.svelte'; //'@/shared/modalsStore.svelte';
-	import { cookeh } from '@/utils/utils';
+	import { modals } from '@/components/root';
+	import { cookeh } from '@/utils';
 	import { onDestroy, onMount } from 'svelte';
 	import { elasticOut, quintOut } from 'svelte/easing';
 	import { slide } from 'svelte/transition';
-
 	import { logoutFunction } from './logoutFunction';
 	import { GoogleLoginButton, MagicLinkSection, PhoneAuthSection } from './index';
 	// import GoogleLoginButton from './GoogleLoginButton.svelte';

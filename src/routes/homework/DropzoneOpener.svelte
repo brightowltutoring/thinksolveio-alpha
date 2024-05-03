@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { IconUpload } from '$src/components/icons';
-	import { modals } from '@/components/root/Navbar.svelte'; //'@/shared/modalsStore';
-
+	import { IconUpload } from '@/components/icons';
+	import { modals } from '@/components/root/';
 	import { onMount } from 'svelte';
 
 	// TODO: unsure of this utility again

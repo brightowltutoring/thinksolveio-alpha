@@ -4,7 +4,7 @@
 // import IconHomework from '@/components/Icons/NavIcons/IconHomework.svelte';
 // import IconClassroom from '@/components/Icons/NavIcons/IconClassroom.svelte';
 
-import { IconHome, IconLogin, IconPlans, IconHomework, IconClassroom } from '$src/components/icons'
+import { IconHome, IconLogin, IconPlans, IconHomework, IconClassroom } from '@/components/icons'
 
 import type { ComponentType } from 'svelte';
 import { dev } from '$app/environment';

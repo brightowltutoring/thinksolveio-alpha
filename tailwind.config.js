@@ -1,4 +1,5 @@
-module.exports = {
+// module.exports = {
+export default {
 	// darkMode: ['class', ':global(html.dark)'],
 	darkMode: ['class', 'html.dark' /*'[data-mode="dark"]'*/],
 	content: ['./src/**/*.{html,js,ts,svelte,md,svx}'],
@@ -7,7 +8,7 @@ module.exports = {
 		extend: {
 			// colors: {
 			// 	'tailwind-blue': '#0ca5e9',
-			// 	'uno-green': '#15b8a6'
+			// 	'uno-green': '#15b8a6's
 			// },
 			screens: {
 				pwa: { raw: '(display-mode: standalone)' },
