@@ -6,7 +6,7 @@
 		"dev": "vite dev --open",
 		"next": "pnpm i svelte@next",
 		"build": "vite build --open",
-		"preview": "vite preview --open",
+		"preview": "vite preview",
 		"clean": "rm -rf node_modules .svelte_kit && pnpm store prune && pnpm i",
 		"bp": "vite build && vite preview",
 		"lint": "prettier --plugin-search-dir . --check .",
