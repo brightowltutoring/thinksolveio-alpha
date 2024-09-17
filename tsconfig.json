@@ -1,6 +1,7 @@
 {
 	"exclude": [
 		// "src/**/old",
+		"**/*.svelte",
 		"**/*old*",
 		"**/*-old.*",
 		"**/*-test.*",
@@ -24,8 +25,7 @@
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
-		"allowImportingTsExtensions":true
-	
+		"allowImportingTsExtensions":true,
 	
 	}
 

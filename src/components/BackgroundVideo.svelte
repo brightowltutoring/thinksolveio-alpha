@@ -1,31 +1,33 @@
 <script lang="ts">
 	import { inview } from '@/utils/';
+	let props: { class: string } = $props();
 
-	let { class: _class = '' } = $props();
-
-	function playVideo(target: Element) {
+	function enter(target: Element) {
 		let videoEl = target as HTMLVideoElement;
 		if (videoEl?.paused) {
 			videoEl.play();
-			// console.log('play');
 		}
 	}
-	function pauseVideo(target: Element) {
+
+
+	function leave(target: Element) {
 		(target as HTMLVideoElement)?.pause();
-		// console.log('paused');
 	}
+	
+	// inview('#testo', { enter, leave });
 </script>
 
-<!-- autoplay -->
 <video
-	use:inview={{ enter: playVideo, leave: pauseVideo }}
+	use:inview={{ enter, leave }}
+	id="testo"
 	preload="auto"
 	controlslist="nodownload"
 	playsinline
+	autoplay
 	muted
 	loop
 	src="/login-bg-video-blurred.mp4"
-	class="absolute top-0 h-screen w-11/12 object-cover blur-2xl dark:blur-3xl dark:hue-rotate-90 dark:invert-[0.95] {_class}"
+	class="absolute top-0 h-screen w-11/12 object-cover blur-2xl dark:blur-3xl dark:hue-rotate-90 dark:invert-[0.95] {props.class}"
 ></video>
 
 <style>

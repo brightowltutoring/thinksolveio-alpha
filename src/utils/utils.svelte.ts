@@ -13,32 +13,21 @@ export function inview(
 		deps?: () => boolean | any
 	}) {
 
-	// deps() added to avoid mutation observer in vanilla case
 	let { options, once, enter, leave, deps = () => true } = { ...args }
 
-
-	let observer = new IntersectionObserver(handler, options)
-
-
 	$effect(() => {
-		// let targets: Element[]
-		// if (typeof node_or_selector === 'string') {
-		// 	targets = deps() && Array.from(document.querySelectorAll(node_or_selector as string))
-		// }
-		// else {
-		// 	targets = [node_or_selector as Element];
-
-		// }
+		let observer = new IntersectionObserver(handler, options)
 
 		const targets: Element[] = typeof node_or_selector === 'string'
+			// deps() added to avoid mutation observer in vanilla case
 			? deps() && document.querySelectorAll(node_or_selector as string)
 			: [node_or_selector as Element];
 
 		targets.forEach((t) => observer.observe(t))
 
-		// return () => {
-		// 	targets.forEach(t => observer.unobserve(t))
-		// }
+		return () => {
+			targets.forEach(t => observer.unobserve(t))
+		}
 	});
 
 

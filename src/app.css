@@ -3,6 +3,64 @@
 @tailwind components;
 @tailwind utilities;
 
+/* TODO: moving @apply classes to app.css because tailwind v4 ... may 8, 2024 */
+/* from /login */
+login-card,
+logout-card {
+	@apply font-Poppins;
+	@apply relative mx-auto block w-[90vw] rounded-2xl px-5 py-10  text-xl shadow-md  duration-300 hover:scale-[1.01] hover:rounded-3xl sm:w-[500px] sm:p-10;
+	@apply bg-[#f2f7fa] dark:bg-[#262333];
+}
+
+/* (landing)/+page.svelte */
+.gradientTextColor {
+	@apply bg-gradient-to-tr from-indigo-600 to-black bg-clip-text text-transparent;
+	@apply dark:from-red-300 dark:via-white dark:to-white;
+}
+
+/* JitsiUser.svelte */
+#meet {
+	@apply relative h-[90vh] w-full -translate-y-36 opacity-0 transition-opacity delay-1000 duration-1000 md:h-[670px] md:-translate-y-10;
+
+	@apply pwa:h-[85vh];
+}
+img[alt='hangup button'] {
+	@apply absolute right-0 top-10 w-[50px] rotate-90 rounded-full bg-[#2a1c44] p-2 transition-transform duration-300 content-[url('/phone.svg')] hover:rotate-0 hover:scale-[1.3] active:bg-red-900 md:bottom-5 md:right-10 md:top-auto;
+}
+/* HorizontalScrollReviews.svelte .. component not in use anymore */
+.edgeCardClick {
+	@apply absolute top-0 z-10 h-full w-16 rounded-full;
+}
+/* Navbar.svelte */
+nav {
+	/* @apply backdrop-blur-3xl; */
+	@apply fixed bottom-0 z-50 flex h-fit w-full items-center justify-center ease-in sm:h-[60px] md:top-0 md:justify-between md:px-[7%] md:py-10;
+
+	@apply pwa:bottom-0 pwa:translate-y-0 pwa:pt-1;
+}
+nav ul {
+	@apply text-xl;
+	@apply grid  w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r  from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200   scrollbar-hide   dark:to-[#25235b] md:ml-24 md:w-auto md:rounded-xl;
+
+	@apply pwa:m-0 pwa:pb-0;
+}
+nav li > a {
+	@apply font-Nunito font-thin;
+	@apply block px-2 py-1  duration-100 ease-in hover:rounded hover:bg-red-300/25 dark:hover:bg-indigo-500/15;
+}
+
+.logo {
+	/* @apply font-Poppins; */
+	@apply hidden p-2  text-xl transition-transform selection:bg-transparent hover:scale-110
+		active:text-red-600 md:block md:translate-x-3 md:translate-y-[0.1rem] md:text-[min(5.5vw,40px)];
+}
+.app_button {
+	@apply font-Nunito;
+	@apply rounded border-b-2 px-3 py-1  text-2xl font-thin duration-300 hover:rounded hover:bg-indigo-400 hover:text-white hover:shadow-lg active:animate-pulse md:text-xl;
+}
+
+/* TODO: moving @apply classes to app.css because tailwind v4 ... may 8, 2024 */
+
 * {
 	user-select: none;
 }

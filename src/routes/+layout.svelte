@@ -2,7 +2,8 @@
 	// import '@unocss/reset/tailwind.css';
 	// import 'uno.css';
 	import '../app.css';
-	import { setIsLoggedIn } from './login/+page.svelte'; // WIP ?
+	import { setIsLoggedIn } from './login/+page.svelte';
+	// WIP ? either context or use req/res authentication?
 	import { page } from '$app/stores';
 	import { isSafari } from '@/shared/clientStore';
 	import { TailwindIndicator } from '@/components/';
@@ -20,6 +21,14 @@
 	setIsLoggedIn(data.haventLoggedOut === 'true'); // seems unneeded?
 	// TODO: how do i initialize from haventLoggedOut cookie in login/+page.svelte??
 	// let isLoggedIn = $state(data.haventLoggedOut === 'true');
+	//
+
+	// Testing createContext
+	// 	import { appProvider, Provider } from './context_testing.svelte';
+	// 	const p = appProvider();
+	// 	const q = Provider(() => 2);
+	// 	console.log('q()', q());
+	// 	console.log('p.value', p.value);
 </script>
 
 <svelte:head>

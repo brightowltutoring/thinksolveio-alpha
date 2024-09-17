@@ -4,7 +4,8 @@ import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 /** @type {import('@sveltejs/kit').Config} */
 // const config = {
 export default {
-	extensions: ['.svelte'],
+	// extensions: ['.svelte'],
+	preprocess: [vitePreprocess()],
 	kit: {
 		adapter: adapter(),
 		alias: {
@@ -13,10 +14,9 @@ export default {
 			$src: './src'
 		}
 	},
-	preprocess: [vitePreprocess()]
-	// vitePlugin: {
-	// 	inspector: true
-	// },
+	vitePlugin: {
+		inspector: true
+	}
 };
 
 // export default config;

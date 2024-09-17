@@ -5,7 +5,7 @@
 	import type { EmailType } from './magicLinkLogin';
 
 	let magicLinkSent = false;
-	// let emptyEmailInputAnimated:boolean;
+	// let emptyEmailInputAnimated: boolean = false;
 	let emptyEmailInputAnimated = $state(false);
 
 	// $:shortPing =!magicLinkSent && emptyEmailInputAnimated && 'animate-ping'

@@ -1,6 +1,37 @@
+<!-- <svelte:head> -->
+<!-- 	<script -->
+<!-- 		src="https://8x8.vc/vpaas-magic-cookie-7418e57a81e64cc399b2d0620579a5bd/external_api.js" -->
+<!-- 		async -->
+<!-- 	></script> -->
+<!-- 	<style> -->
+<!-- 		html, -->
+<!-- 		body, -->
+<!-- 		#jaas-container { -->
+<!-- 			height: 100vh; -->
+<!-- 		} -->
+<!-- 	</style> -->
+<!-- 	<script type="text/javascript"> -->
+<!-- 		window.onload = () => { -->
+<!-- 			const api = new JitsiMeetExternalAPI('8x8.vc', { -->
+<!-- 				roomName: -->
+<!-- 					'vpaas-magic-cookie-7418e57a81e64cc399b2d0620579a5bd/SampleAppVisualSetUpsBlastDangerously', -->
+<!-- 				parentNode: document.querySelector('#jaas-container') -->
+<!-- 			}); -->
+<!-- 		}; -->
+<!-- 	</script> -->
+<!-- </svelte:head> -->
+<!---->
+<!-- <div id="jaas-container" /> -->
+
+<iframe
+	allow="camera; microphone; display-capture"
+	src="https://meet.jit.si/yourmeetingname"
+	allowfullscreen
+	style="height: 400px; width: 100%; border: 0px;"
+></iframe>
+
 <!-- EXAMPLE 1: broken from alpha 111 -->
 <!-- <script lang="ts">
-	import { version } from '$service-worker';
 	const state = $state({
 		currentTarget: '',
 		target: ''
@@ -28,7 +59,7 @@
 			border-color: #29fc39;
 		}
 	}
-	
+
 	div {
 		border: 2px dashed #aaa;
 		padding: 8px;
@@ -96,7 +127,7 @@
 <!-- <script>
 	import Button from './Button.svelte';
 	const onclick = () => console.log('zoink');
-	
+
 </script>
 
 <Button {onclick}>Click Me!</Button> -->
@@ -109,3 +140,110 @@
 </script>
 
 <Component {attrs} increment={() => $attrs.count++}></Component> -->
+<!--
+<script lang="ts">
+	/* VERSION 1 SUBTRACTING ARRAYS */
+	const A = [true, false, 1, 2, 3, true];
+	const B = [true, false];
+
+	let bIndex = 0;
+
+	// let diff = [];
+	// for (let a of A) {
+	// 	let found = false;
+	// 	for (let i = bIndex; i < B.length; i++) {
+	// 		if (a === B[i]) {
+	// 			found = true;
+	// 			bIndex = i + 1;
+	// 			break;
+	// 		}
+	// 	}
+	// 	if (!found) {
+	// 		diff.push(a);
+	// 	}
+	// }
+
+	const diff = A.filter((a) => {
+		for (let i = bIndex; i < B.length; i++) {
+			if (a === B[i]) {
+				bIndex = i + 1;
+				return false;
+			}
+		}
+		return true;
+	});
+
+	console.log(diff);
+
+	/* VERSION 2 SUBTRACTING ARRAYS*/
+	// const A = [true, false, 1, 2, 3, true];
+	// const B = [true, false];
+
+	// const countA = A.reduce((acc, el) => {
+	// 	acc[el] = (acc[el] || 0) + 1;
+	// 	return acc;
+	// }, {});
+
+	// const countB = B.reduce((acc, el) => {
+	// 	acc[el] = (acc[el] || 0) + 1;
+	// 	return acc;
+	// }, {});
+
+	// let diff = [];
+
+	// for (let key in countA) {
+	// 	if (countA[key] - (countB[key] || 0) > 0) {
+	// 		// diff.push(eval(key)); // eval is considered unsafe
+	// 		diff.push(A.find((el) => String(el) === key));
+	// 	}
+	// }
+
+	// console.log(diff);
+
+	/* VERSION 2 SUBTRACTING ARRAYS */
+	// const A = [true, false, 1, 2, 3, true];
+	// const B = [true, false];
+
+	// const BB = [...B];
+
+	// let indices = [];
+
+	// for (let i in A) {
+	// 	if (BB[0] === A[i] && !indices.includes(i)) {
+	// 		BB.shift();
+	// 		indices.push(i);
+	// 	}
+	// }
+
+	// let diff = A.filter((_, i) => {
+	// 	return !indices.includes(String(i));
+	// });
+
+	// console.log(diff);
+
+	// function getCountObj(arr: any[]) {
+	// 	return arr.reduce((acc, el) => {
+	// 		acc[el] = (acc[el] || 0) + 1;
+	// 		return acc;
+	// 	}, {});
+	// }
+
+	// const countA = getCountObj(A);
+	// const countB = getCountObj(B);
+
+	// console.log(countA);
+	// console.log(countB);
+</script> -->
+<!-- <script lang="ts">
+	import type { Snippet } from 'svelte';
+	type Props = { children: Snippet; flex: boolean };
+	// let props = $props<{ children: Snippet; flex: boolean }>();
+	// let props = $props<Props>();
+	let props: Props = $props();
+
+	// props.
+</script>
+
+<div class="column" class:props.flex>
+	{@render props.children()}
+</div> -->

@@ -37,13 +37,13 @@
 					onclick={(e) => horizScroll(e, index, 'right')}
 					aria-label="right horizontal scroll to next review card"
 					class="edgeCardClick right-0"
-				/>
+				></a>
 				<a
 					href={`#card_${index - 1}`}
 					aria-label="left horizontal scroll to next review card"
 					onclick={(e) => horizScroll(e, index, 'left')}
 					class="edgeCardClick left-0"
-				/>
+				></a>
 				<ReviewCreator {title} {name} {date}>
 					{body}
 				</ReviewCreator>
@@ -52,8 +52,9 @@
 	</div>
 </section>
 
-<style lang="postcss">
+<!-- moved to app.css -->
+<!-- <style lang="postcss">
 	.edgeCardClick {
 		@apply absolute top-0 z-10 h-full w-16 rounded-full;
 	}
-</style>
+</style> -->

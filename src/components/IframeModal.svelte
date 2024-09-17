@@ -14,23 +14,28 @@
 	// import Suspense from '@/components/wrappers/Suspense.svelte';
 	import { Modal, Suspense } from '@/components/wrappers/';
 
-	let { iframe }: { iframe: iframeModalType } = $props();
+	let props: { iframe: iframeModalType } = $props();
 
 	function iframeLoaded() {
 		// setTimeout(() => {
-		iframe.loading = 'success';
-		console.log(`woohoo loaded ${iframe.url}`);
+		props.iframe.loading = 'success';
+		console.log(`woohoo loaded ${props.iframe.url}`);
 		// }, 3000);
 	}
 </script>
 
 <Modal
 	body
-	isOpen={iframe.isOpen}
-	close={() => (iframe.isOpen = false)}
+	isOpen={props.iframe.isOpen}
+	close={() => (props.iframe.isOpen = false)}
 	class="bg-[rgba(0,0,0,0.1)]"
 >
-	<Suspense loading={iframe.loading}>
-		<iframe class="h-full w-full" onload={iframeLoaded} src={iframe.url} title={iframe.name} />
+	<Suspense loading={props.iframe.loading}>
+		<iframe
+			class="h-full w-full"
+			onload={iframeLoaded}
+			src={props.iframe.url}
+			title={props.iframe.name}
+		></iframe>
 	</Suspense>
 </Modal>

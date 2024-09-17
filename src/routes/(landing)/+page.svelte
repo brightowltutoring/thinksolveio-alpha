@@ -1,14 +1,15 @@
-<script context="module">
+<script module>
 	let prevTimesMounted = $state(0);
+	console.log('prevTimesMounted', prevTimesMounted);
 </script>
 
 <script lang="ts">
 	import { browser, dev } from '$app/environment';
 	import { BackgroundVideo } from '@/components/';
 	import { HomeworkPage, PlansPage, ReviewsPage } from '@/routes/';
-	// import ReviewsPage from '@/routes/reviews/Reviews.svelte';
 	import { sleep } from '@/utils/';
 
+	// import ReviewsPage from '@/routes/reviews/Reviews.svelte';
 	// If js is enabled then 'elastic-out' animation will play once.
 	// With JS disabled the css animation plays on every navigation to this route .. which is superior to svelte js animation (doesnt work without js)
 	if (browser && prevTimesMounted === 0) {
@@ -29,7 +30,13 @@
 				<!-- <div class:disable_animation={prevTimesMounted > 0} class="elastic-out grid grid-rows-1"> -->
 				<div class:elastic-out={prevTimesMounted === 0} class="grid grid-rows-1">
 					<div class="pb-4 font-Poppins text-6xl">
-						{dev ? 'Demo' : ' Math, Physics'}
+						<!-- {dev ? 'Demo' : ' Math, Physics'} -->
+						<!-- stopped working in svelte 5 alpha 152 -->
+						{#if dev}
+							Demo
+						{:else}
+							Math, Physics
+						{/if}
 
 						<span class="gradientTextColor"> ... Online! </span>
 					</div>
@@ -92,14 +99,16 @@
 
 <!-- <Schools /> -->
 
-<style lang="postcss">
+<!-- <style lang="postcss"> -->
+<style>
 	/* dark:to-white; dark:from-red-300 dark:via-white */
-	.gradientTextColor {
+	/*TODO: moved to app.css */
+	/* .gradientTextColor {
 		@apply bg-gradient-to-tr from-indigo-600 to-black bg-clip-text text-transparent;
 		:global(html.dark) & {
 			@apply from-red-300 via-white to-white;
 		}
-	}
+	} */
 
 	/* moved from app.css to here, since only used here */
 	.elastic-out {

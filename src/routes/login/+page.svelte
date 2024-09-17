@@ -157,14 +157,14 @@
 	<login-card in:slide|global={{ duration: 400, easing: quintOut }}>
 		<GoogleLoginButton />
 
-		<p class="py-3" />
+		<p class="py-3"></p>
 		<div class="hidden pwa:block">
 			<PhoneAuthSection />
 		</div>
 		<div class="pwa:hidden">
 			<MagicLinkSection />
 
-			<p class="py-3" />
+			<p class="py-3"></p>
 			<PhoneAuthSection />
 		</div>
 	</login-card>
@@ -182,18 +182,20 @@
 			>
 				Logout
 			</button>
-			<p class="py-3" />
+			<p class="py-3"></p>
 		</form>
 	</logout-card>
 {/if}
 
 <style lang="postcss">
 	/* dark:bg-[#262333] */
-	login-card,
+
+	/* TODO: moved to app.css due to tailwind v4 */
+	/* login-card,
 	logout-card {
 		@apply relative mx-auto block w-[90vw] rounded-2xl bg-[#f2f7fa] px-5 py-10 font-Poppins text-xl shadow-md duration-300 hover:scale-[1.01] hover:rounded-3xl   dark:bg-[#262333] sm:w-[500px] sm:p-10;
 		:global(html.dark) & {
 			@apply bg-[#262333];
 		}
-	}
+	} */
 </style>

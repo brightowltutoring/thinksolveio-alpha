@@ -1,5 +1,7 @@
 <!-- use context provider or keep? -->
-<script context="module" lang="ts">
+
+<!-- <script lang="ts" module> -->
+<script lang="ts" context="module">
 	let isDarkMode = $state(false);
 
 	export const getIsDarkMode = () => isDarkMode;
@@ -18,7 +20,7 @@
 	}
 </script>
 
-<script>
+<script lang="ts">
 	import { onMount } from 'svelte';
 	import { scale } from 'svelte/transition';
 	import { elasticOut } from 'svelte/easing';
@@ -28,6 +30,7 @@
 		isDarkMode = document.documentElement.classList.contains('dark');
 
 		const matchDark = window.matchMedia('(prefers-color-scheme: dark)');
+
 		const setMode = (e: MediaQueryListEvent) => setDarkMode(e.matches);
 
 		matchDark.addEventListener('change', setMode);

@@ -35,8 +35,8 @@
 	</div>
 {/if}
 
-<style lang="postcss">
+<!-- <style lang="postcss">
 	.topRightCornerPage {
 		@apply absolute left-20 right-20 top-20 z-50 grid scale-105 place-content-center p-5 backdrop-blur-lg;
 	}
-</style>
+</style> -->

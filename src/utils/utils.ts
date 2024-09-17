@@ -1,29 +1,28 @@
 import { isDarkMode } from '@/shared/clientStore';
 import { page } from '$app/stores';
-import { getContext, onMount, setContext } from 'svelte';
+import { getContext, hasContext, onMount, setContext } from 'svelte';
 import { get, type Readable } from 'svelte/store';
 // import { browser } from '$app/environment';
 export const is_client = typeof window !== 'undefined'; // framework agnostic version of 'browser'
 
-
 export function createContext<T>(state_creator?: () => T) {
 	const key = Symbol();
 
-	const consumer = () => getContext(key) as T
+	const consumer = () => getContext<ReturnType<typeof provider>>(key) //<T>
 
 	const provider = state_creator
 		? () => setContext(key, state_creator())
 		: (v?: T) => setContext(key, v) as T
 
-
-	// let provider = (v?: T) => setContext(key, v) as T
-
-	// if (state_creator) {
-	// 	provider = () => setContext(key, state_creator())
-	// }
-
 	return [provider, consumer]
 }
+
+
+// let provider = (v?: T) => setContext(key, v) as T
+
+// if (state_creator) {
+// 	provider = () => setContext(key, state_creator())
+// }
 
 //TODO: BROKEN
 // function createContextWIP<T>(state_creator: () => T|undefined = ()=>undefined) {
@@ -50,32 +49,27 @@ export function createContext<T>(state_creator?: () => T) {
 // 	}
 // }
 
-
 export function createContextFn<T>(state_creator: () => T) {
 	const key = Symbol();
 
-	const consumer = () => getContext(key) as T
-	const provider = () => setContext(key, state_creator())
+	const consumer = () => getContext(key) as T;
+	const provider = () => setContext(key, state_creator());
 
-	return [provider, consumer]
+	return [provider, consumer];
 }
-
 
 export function createContextClassic<T>() {
 	let key = Symbol();
 
-	const consumer = () => getContext(key) as T
-	const provider = (v: T) => setContext(key, v)
+	const consumer = () => getContext(key) as T;
+	const provider = (v: T) => setContext(key, v);
 
-	return [provider, consumer]
+	return [provider, consumer];
 }
-
-
 
 // to be used in the root (i.e. +layout.svelte)
 import { onNavigate } from '$app/navigation';
 export function ViewTransition() {
-
 	onNavigate((navigation) => {
 		if (!document.startViewTransition) return;
 
@@ -87,7 +81,6 @@ export function ViewTransition() {
 		});
 	});
 }
-
 
 // -6-5-4|-3-2-1|012|345|678
 //  0 1 2| 0 1 2|012|012|012
@@ -101,17 +94,22 @@ export function mod(a: number, n: number) {
 }
 
 // long press helper
-let timeoutId: ReturnType<typeof setTimeout>
-let intervalId: ReturnType<typeof setTimeout>
-export function longpress(node: HTMLElement, { duration = 300,
-	down = () => {
-		console.log('holdin it down')
-	},
-	up = () => { console.log('wat up') },
-}) {
-	let start = 0
-	let running = 0
-
+let timeoutId: ReturnType<typeof setTimeout>;
+let intervalId: ReturnType<typeof setTimeout>;
+export function longpress(
+	node: HTMLElement,
+	{
+		duration = 300,
+		down = () => {
+			console.log('holdin it down');
+		},
+		up = () => {
+			console.log('wat up');
+		}
+	}
+) {
+	let start = 0;
+	let running = 0;
 
 	node.addEventListener('mousedown', handleMouseDown);
 
@@ -119,26 +117,25 @@ export function longpress(node: HTMLElement, { duration = 300,
 		destroy() {
 			node.removeEventListener('mousedown', handleMouseDown);
 		}
-	}
-
+	};
 
 	function handleMouseDown(e: Event) {
-		e.preventDefault()
+		e.preventDefault();
 
 		console.log('mousedownnnn');
-		start = performance.now()
+		start = performance.now();
 
-		timeoutId = setTimeout(down, duration)
+		timeoutId = setTimeout(down, duration);
 		intervalId = setInterval(() => {
-			running += 100
+			running += 100;
 			console.log(running);
-		}, 100)
+		}, 100);
 
 		node.addEventListener('mouseup', handleMouseUp);
 	}
 
 	function handleMouseUp(e: Event) {
-		e.preventDefault()
+		e.preventDefault();
 		clearTimeout(timeoutId);
 		clearInterval(intervalId);
 
@@ -147,7 +144,7 @@ export function longpress(node: HTMLElement, { duration = 300,
 		let elapsed = performance.now() - start;
 
 		if (elapsed > duration) {
-			up()
+			up();
 		}
 		node.removeEventListener('mouseup', handleMouseUp);
 	}
@@ -435,8 +432,6 @@ export async function sendDummyTextFileToGoogleDrive(name: string) {
 		body: data
 	});
 }
-
-
 
 // export function receive(target: EventTarget, event_handler_object: Record<string, () => void>) {
 // 	onMount(() => {

@@ -1,6 +1,7 @@
-export function getOptions(admin = false) {
+export function getOptions(admin = false, parentNode = null as HTMLElement | null) {
+
 	return {
-		parentNode: null as Element | null, // parentNode: is_client && document.querySelector('#meet'),
+		parentNode, // parentNode: is_client && document.querySelector('#meet'),
 		roomName: 'ThinkSolveio',
 		configOverwrite: {
 			// startAudioOnly: true,

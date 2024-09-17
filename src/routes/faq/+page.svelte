@@ -9,9 +9,10 @@
 
 	let faqContainer: HTMLElement;
 	onMount(() => {
-		faqContainer.querySelectorAll('SUMMARY').forEach((el, index) => {
-			el.insertAdjacentHTML('afterbegin', `Q${index + 1}. `);
-		});
+		// TODO: replaced by 'counter-reset' css completely 🤯
+		// faqContainer.querySelectorAll('SUMMARY').forEach((el, index) => {
+		// 	el.insertAdjacentHTML('afterbegin', `Q${index + 1}. `);
+		// });
 
 		// using 'event delegation'
 		faqContainer.addEventListener('click', (event) => {
@@ -189,6 +190,15 @@
 
 <!-- The markdown of this component being repetitive, makes vanilla css a better choice for styling (also the event delegation classList add logic works easiest with vanilla css).  It's also possible to abstract the details/summary elements into a components and use tailwind directly in those components ... -->
 <style lang="postcss">
+	:global(body) {
+		counter-reset: my-sec-counter;
+
+		& summary::before {
+			counter-increment: my-sec-counter;
+			content: 'Q' counter(my-sec-counter) '. ';
+		}
+	}
+
 	:root {
 		--light-green: rgb(230, 255, 249);
 		--green: rgb(89, 208, 174);
@@ -210,7 +220,7 @@
 	}
 
 	details {
-		@apply font-Nunito;
+		font-family: Nunito, sans-serif;
 		border: 0px solid #eee;
 		border-radius: var(--borderRadius);
 		padding: 0.5em 0.5em 0;

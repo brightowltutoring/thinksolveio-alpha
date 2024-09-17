@@ -1,12 +1,18 @@
 <script lang="ts">
 	import type { Snippet } from 'svelte';
-	type Props = {
+
+	interface Props {
 		title: string;
 		name: string;
 		date: string;
 		children: Snippet;
-	};
-	let { title = '', name = '', date = '', children }: Props = $props();
+	}
+
+	// interface Props extends Record<'title' | 'name' | 'date', string> {
+	// 	children: Snippet;
+	// }
+
+	let props: Props = $props();
 
 	import { getIsDarkMode, getDebouncedScrollY } from '@/components/root/';
 	// import { getIsDarkMode } from '@/components/root/Theme.svelte';
@@ -28,7 +34,7 @@
 	<review-card-contents
 		class="absolute rounded-lg p-10 duration-500 sm:hover:bg-white/60 sm:hover:drop-shadow-2xl sm:dark:hover:bg-inherit sm:dark:hover:drop-shadow-none"
 	>
-		<h1 class="font-extrabold">{title}</h1>
+		<h1 class="font-extrabold">{props.title}</h1>
 
 		<div class="flex flex-row">
 			{#each Array(5) as _}
@@ -42,15 +48,15 @@
 			{/each}
 		</div>
 
-		<div class="italic">on {date}</div>
+		<div class="italic">on {props.date}</div>
 
 		<div class="py-3">
 			<!-- <slot /> -->
-			{@render children?.()}
+			{@render props.children?.()}
 		</div>
 
 		<div class="absolute bottom-0 right-0 -my-10 mx-5 py-3 font-bold">
-			{name}
+			{props.name}
 		</div>
 	</review-card-contents>
 </review-card>

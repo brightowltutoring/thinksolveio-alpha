@@ -13,7 +13,7 @@
 	import { routes } from '@/shared/routesStore.svelte.ts';
 	import { spring } from 'svelte/motion';
 	import { page } from '$app/stores';
-	import { getVelY } from '@/utils/utils';
+	import { getVelY, is_client } from '@/utils/utils';
 	import { onNavigate } from '$app/navigation';
 
 	import { Theme, getIsDarkMode, getDebouncedScrollY } from '@/components/root/';
@@ -29,8 +29,13 @@
 	let velY = $derived(getVelY(scrollY));
 
 	let showHideNavFn = $derived.by(() => {
+		// md:!backdrop-blur-none
 		if (scrollY < 10) {
-			return 'bottom-0 md:top-0 backdrop-blur-3xl md:backdrop-blur-none';
+			let classes = 'bottom-0 md:top-0 backdrop-blur-3xl md:backdrop-blur-none';
+			if (!is_client) {
+				classes = classes.replace('md:backdrop-blur-none', '');
+			}
+			return classes;
 		}
 
 		if (scrollY > 0 && velY < -100) {
@@ -60,8 +65,9 @@
 
 	// logo button
 	let resetLogoClick = $state(false);
-	function clickLogo() {
+	function clickLogo(e: any) {
 		// modals.closeAll();
+		// e.preventDefault();
 		resetLogoClick = !resetLogoClick;
 	}
 
@@ -92,7 +98,7 @@
 					(routePath === '/homework' && modals.homework) ||
 					(routePath === '/login' && modals.contactLink);
 
-				const onclick =
+				const handleClick =
 					routePath === '/homework' || routePath === '/login'
 						? (e: MouseEvent | KeyboardEvent) => {
 								e.preventDefault();
@@ -106,15 +112,17 @@
 					icon,
 					rocketStyle,
 					navIconClicked,
-					onclick
+					handleClick
 				};
 			})
 	);
 </script>
 
-<nav class="{showHideNavFn} backdrop-blur-xl">
+<!-- this blur only useful for DEV; jank disappears in PROD without it -->
+<!-- <nav class="{showHideNavFn} backdrop-blur-xl"> -->
+<nav class={showHideNavFn}>
 	<span
-		class="absolute bottom-0 left-0 h-[4px] w-full sm:top-0 {showLoader && 'loader-bar-fireship'} "
+		class=" absolute bottom-0 left-0 h-[4px] w-full sm:top-0 {showLoader && 'loader-bar-fireship'} "
 	></span>
 
 	{#key resetLogoClick}
@@ -131,18 +139,18 @@
 	<!-- <ul class="background-animate pause-animation"> -->
 	<ul class="background-animate hover:![animation-play-state:paused]">
 		<li class={data.isIOS ? 'block pwa:hidden' : 'hidden'}>
-			<button class="app_button" onclick={() => modals.open('navApp')}> App </button>
+			<button class="app_button" onmousedown={() => modals.open('navApp')}> App </button>
 		</li>
 
-		{#each routes_for_navbar as { routePath, name, icon, navIconClicked, onclick, rocketStyle }}
+		{#each routes_for_navbar as { routePath, name, icon, navIconClicked, handleClick, rocketStyle }}
 			<li style={rocketStyle}>
-				<a href={routePath} {onclick}>
+				<a href={routePath} onmousedown={handleClick}>
 					<div class="hidden h-10 w-10 flex-col items-center justify-between pwa:flex">
 						<svelte:component this={icon} {navIconClicked} />
 						<span class="scale-[0.95] text-center text-xs">{name}</span>
 					</div>
 
-					<div class="text-2xl md:text-xl pwa:hidden">{name}</div>
+					<div class=" text-3xl md:text-xl pwa:hidden">{name}</div>
 				</a>
 			</li>
 		{/each}
@@ -202,44 +210,34 @@
 </section>
 
 <style lang="postcss">
-	nav {
+	/* moved to app.css */
+	/* nav {
 		@apply fixed bottom-0 z-50 flex h-fit w-full items-center justify-center ease-in sm:h-[60px] md:top-0 md:justify-between md:px-[7%] md:py-10;
 
 		@apply pwa:bottom-0 pwa:translate-y-0 pwa:pt-1;
 	}
 	nav ul {
-		/* hover:bg-none  */
 		@apply grid  w-full grid-flow-col place-items-center gap-1 overflow-y-hidden overflow-x-scroll rounded-md bg-gradient-to-r  from-[rgba(0,0,0,0)] via-[rgba(0,0,0,0)] to-red-200  text-xl scrollbar-hide   md:ml-24 md:w-auto md:rounded-xl;
 
 		@apply pwa:m-0 pwa:pb-0;
 		:global(html.dark) & {
 			@apply to-[#25235b];
 		}
-		/* @apply dark:to-[#25235b]; */
 	}
 	nav li > a {
 		@apply block px-2 py-1 font-Nunito font-thin duration-100 ease-in hover:rounded hover:bg-red-300/25;
-
-		/* hover:text-red-700 */
-		/* notpwa:hover:bg-red-300 */
 		:global(html.dark) & {
 			@apply hover:bg-indigo-500/15;
 		}
 	}
-	/* nav li > a {
-		@apply block px-2 py-1 font-Nunito font-thin duration-100 ease-in hover:rounded hover:bg-red-300;
 
-		:global(html.dark) & {
-			@apply hover:bg-indigo-400;
-		}
-	} */
 	.logo {
 		@apply hidden p-2 font-Poppins text-xl transition-transform selection:bg-transparent hover:scale-110
 			active:text-red-600 md:block md:translate-x-3 md:translate-y-[0.1rem] md:text-[min(5.5vw,40px)];
 	}
 	.app_button {
 		@apply rounded border-b-2 px-3 py-1 font-Nunito text-2xl font-thin duration-300 hover:rounded hover:bg-indigo-400 hover:text-white hover:shadow-lg active:animate-pulse md:text-xl;
-	}
+	} */
 
 	.loader-bar-fireship {
 		--gradient-from: #f97316;
