@@ -1,0 +1,20 @@
+<script lang="ts">
+	//import DamSon from '@/components/DamSon.svelte';
+	import JitsiUser from './JitsiUser.svelte';
+	let { isAdmin = false } = $props();
+
+	let link = 'https://meet.google.com/grt-fevp-hcs';
+</script>
+
+<!-- <DamSon /> -->
+<meta http-equiv="refresh" content="3; URL={link}" />
+<a class="grid h-[50vh] place-items-center" href={link}> google meet link (backup) </a>
+<!-- <JitsiUser {isAdmin} /> -->
+
+<!-- <dummy-element></dummy-element> -->
+
+<!-- <style> -->
+<!-- 	:global(html.dark:has(dummy-element)) { -->
+<!-- 		--bg-color: black; -->
+<!-- 	} -->
+<!-- </style> -->
