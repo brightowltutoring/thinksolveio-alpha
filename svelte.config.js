@@ -12,7 +12,7 @@ export default {
 			'@': './src/*',
 			$routes: './src/routes',
 			$src: './src'
-		}
+		},
 	},
 	vitePlugin: {
 		inspector: true

@@ -11,6 +11,9 @@ const json = readFileSync(file, 'utf8');
 const pkg = JSON.parse(json);
 
 export default defineConfig({
+	//build: {
+	//	minify: false 
+	//},
 	define: {
 		'import.meta.env.ENV_VERSION': JSON.stringify(pkg.devDependencies.svelte),
 		__SVELTE_VERSION__: JSON.stringify(pkg.devDependencies.svelte),

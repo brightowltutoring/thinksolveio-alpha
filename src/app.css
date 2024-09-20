@@ -74,6 +74,7 @@ nav li > a {
 		local(''),
 		url('/fonts/nunito-v25-latin-200.woff2') format('woff2'),
 		url('/fonts/nunito-v25-latin-200.woff') format('woff');
+	font-display: swap;
 }
 @font-face {
 	font-family: 'Nunito';
@@ -83,6 +84,7 @@ nav li > a {
 		local(''),
 		url('/fonts/nunito-v25-latin-regular.woff2') format('woff2'),
 		url('/fonts/nunito-v25-latin-regular.woff') format('woff');
+	font-display: swap;
 }
 @font-face {
 	font-family: 'Poppins';
@@ -92,6 +94,7 @@ nav li > a {
 		local(''),
 		url('/fonts/poppins-v20-latin-100.woff2') format('woff2'),
 		url('/fonts/poppins-v20-latin-100.woff') format('woff');
+	font-display: swap;
 }
 @font-face {
 	font-family: 'Poppins';
@@ -101,6 +104,7 @@ nav li > a {
 		local(''),
 		url('/fonts/poppins-v20-latin-700.woff2') format('woff2'),
 		url('/fonts/poppins-v20-latin-700.woff') format('woff');
+	font-display: swap;
 }
 
 .dark.classroom {
