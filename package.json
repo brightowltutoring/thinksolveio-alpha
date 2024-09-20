@@ -15,14 +15,14 @@
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-auto": "^3.2.4",
-		"@sveltejs/kit": "^2.5.27",
+		"@sveltejs/adapter-auto": "^3.2.5",
+		"@sveltejs/kit": "^2.5.28",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
 		"@tailwindcss/typography": "^0.5.15",
 		"@types/dropzone": "^5.7.8",
 		"@types/ua-parser-js": "^0.7.39",
 		"autoprefixer": "^10.4.20",
-		"eslint": "^9.10.0",
+		"eslint": "^9.11.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-prettier": "^5.2.1",
 		"eslint-plugin-svelte": "^2.44.0",
@@ -31,12 +31,12 @@
 		"prettier-plugin-svelte": "^3.2.6",
 		"prettier-plugin-tailwindcss": "^0.5.14",
 		"remark-math": "6.0.0",
-		"svelte": "5.0.0-next.249",
+		"svelte": "5.0.0-next.257",
 		"svelte-check": "^3.8.6",
 		"tailwindcss": "3.4.3",
 		"tslib": "^2.7.0",
 		"typescript": "^5.6.2",
-		"vite": "^5.4.5"
+		"vite": "^5.4.7"
 	},
 	"type": "module",
 	"dependencies": {
@@ -44,7 +44,7 @@
 		"@types/dom-view-transitions": "^1.0.5",
 		"@types/jitsi-meet": "^2.0.5",
 		"dropzone": "6.0.0-beta.2",
-		"firebase": "^10.13.1",
+		"firebase": "^10.13.2",
 		"stripe": "^15.12.0",
 		"tailwind-scrollbar-hide": "^1.1.7",
 		"ua-parser-js": "^1.0.39"
