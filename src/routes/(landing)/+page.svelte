@@ -1,6 +1,6 @@
 <script module>
 	let prevTimesMounted = $state(0);
-	console.log('prevTimesMounted', prevTimesMounted);
+	//console.log('prevTimesMounted', prevTimesMounted);
 </script>
 
 <script lang="ts">
