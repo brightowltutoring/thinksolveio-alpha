@@ -36,62 +36,19 @@
 	{#if data.isMobile}
 		<link rel="manifest" href="/manifest.json" />
 	{/if}
-	<!-- <link -->
-	<!-- 	rel="preload" -->
-	<!-- 	href="/fonts/nunito-v25-latin-200.woff2" -->
-	<!-- 	as="font" -->
-	<!-- 	type="font/woff2" -->
-	<!-- 	crossorigin="anonymous" -->
-	<!-- /> -->
-	<!-- <link -->
-	<!-- 	rel="preload" -->
-	<!-- 	href="/fonts/nunito-v25-latin-200.woff" -->
-	<!-- 	as="font" -->
-	<!-- 	type="font/woff" -->
-	<!-- 	crossorigin="anonymous" -->
-	<!-- /> -->
-	<!-- <link -->
-	<!-- 	rel="preload" -->
-	<!-- 	href="/fonts/nunito-v25-latin-regular.woff2" -->
-	<!-- 	as="font" -->
-	<!-- 	type="font/woff2" -->
-	<!-- 	crossorigin="anonymous" -->
-	<!-- /> -->
-	<!-- <link -->
-	<!-- 	rel="preload" -->
-	<!-- 	href="/fonts/nunito-v25-latin-regular.woff" -->
-	<!-- 	as="font" -->
-	<!-- 	type="font/woff" -->
-	<!-- 	crossorigin="anonymous" -->
-	<!-- /> -->
-	<!-- <link -->
-	<!-- 	rel="preload" -->
-	<!-- 	href="/fonts/poppins-v20-latin-100.woff2" -->
-	<!-- 	as="font" -->
-	<!-- 	type="font/woff2" -->
-	<!-- 	crossorigin="anonymous" -->
-	<!-- /> -->
-	<!-- <link -->
-	<!-- 	rel="preload" -->
-	<!-- 	href="/fonts/poppins-v20-latin-100.woff" -->
-	<!-- 	as="font" -->
-	<!-- 	type="font/woff" -->
-	<!-- 	crossorigin="anonymous" -->
-	<!-- /> -->
-	<!-- <link -->
-	<!-- 	rel="preload" -->
-	<!-- 	href="/fonts/poppins-v20-latin-700.woff2" -->
-	<!-- 	as="font" -->
-	<!-- 	type="font/woff2" -->
-	<!-- 	crossorigin="anonymous" -->
-	<!-- /> -->
-	<!-- <link -->
-	<!-- 	rel="preload" -->
-	<!-- 	href="/fonts/poppins-v20-latin-700.woff" -->
-	<!-- 	as="font" -->
-	<!-- 	type="font/woff" -->
-	<!-- 	crossorigin="anonymous" -->
-	<!-- /> -->
+	<link
+		rel="preload"
+		href="/fonts/Poppins-Variable.woff2"
+		as="font"
+		type="font/woff2"
+		crossorigin
+	/><link
+		rel="preload"
+		href="/fonts/Nunito-Variable.woff2"
+		as="font"
+		type="font/woff2"
+		crossorigin
+	/>
 </svelte:head>
 
 <!-- <LayoutProvider> -->

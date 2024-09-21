@@ -72,7 +72,6 @@ nav li > a {
 	font-style: normal;
 	font-weight: 200 400;
 	src: local(''), url('/fonts/Nunito-Variable.woff2') format("woff2");
-	font-display: fallback; 
 }
 
 /* In a previous iteration i used to include more Poppins fonts, however switching to this 'variations' version showed me I was only using 100 font weight*/
@@ -81,7 +80,6 @@ nav li > a {
 	font-style: normal;
 	font-weight: 100;
 	src: local(''), url('/fonts/Poppins-Variable.woff2') format("woff");
-	font-display: fallback; 
 }
 
 
