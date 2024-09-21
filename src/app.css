@@ -65,47 +65,25 @@ nav li > a {
 	user-select: none;
 }
 
-/* CURRENT WAY: download various .woff, .woff2 files for Nunito and Poppins and reference them below */
+
+/*Switched to variants format ... much less code! Still need to understand adding the 'unicode-range' property (mauss dot dev)*/
 @font-face {
 	font-family: 'Nunito';
 	font-style: normal;
-	font-weight: 200;
-	src:
-		local(''),
-		url('/fonts/nunito-v25-latin-200.woff2') format('woff2'),
-		url('/fonts/nunito-v25-latin-200.woff') format('woff');
+	font-weight: 200 300;
 	font-display: swap;
+	src: url('/fonts/Nunito-Variable.woff2') format("woff2-variations"),
 }
-@font-face {
-	font-family: 'Nunito';
-	font-style: bold;
-	font-weight: 400;
-	src:
-		local(''),
-		url('/fonts/nunito-v25-latin-regular.woff2') format('woff2'),
-		url('/fonts/nunito-v25-latin-regular.woff') format('woff');
-	font-display: swap;
-}
+
+/* In a previous iteration i used to include more Poppins fonts, however switching to this 'variations' version showed me I was only using 100 font weight*/
 @font-face {
 	font-family: 'Poppins';
 	font-style: normal;
 	font-weight: 100;
-	src:
-		local(''),
-		url('/fonts/poppins-v20-latin-100.woff2') format('woff2'),
-		url('/fonts/poppins-v20-latin-100.woff') format('woff');
 	font-display: swap;
+	src: url('/fonts/Poppins-Variable.woff2') format("woff2-variations"),
 }
-@font-face {
-	font-family: 'Poppins';
-	font-style: bold;
-	font-weight: 700;
-	src:
-		local(''),
-		url('/fonts/poppins-v20-latin-700.woff2') format('woff2'),
-		url('/fonts/poppins-v20-latin-700.woff') format('woff');
-	font-display: swap;
-}
+
 
 .dark.classroom {
 	--bg-color: black;
