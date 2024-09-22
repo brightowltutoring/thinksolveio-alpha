@@ -150,7 +150,7 @@
 						<span class="scale-[0.95] text-center text-xs">{name}</span>
 					</div>
 
-					<div class=" text-3xl md:text-xl pwa:hidden">{name}</div>
+					<div class="text-2xl md:text-xl pwa:hidden">{name}</div>
 				</a>
 			</li>
 		{/each}

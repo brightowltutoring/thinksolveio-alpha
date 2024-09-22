@@ -5,6 +5,7 @@
 
 /* TODO: moving @apply classes to app.css because tailwind v4 ... may 8, 2024 */
 /* from /login */
+
 login-card,
 logout-card {
 	@apply font-Poppins;
@@ -71,8 +72,8 @@ nav li > a {
 	font-family: 'Nunito';
 	font-style: normal;
 	font-weight: 200 300; 
-	font-display:optional;
-	src: local(''), url('/fonts/Nunito-Variable.woff2') format("woff2");  
+	font-display: optional;
+	src:  url('/fonts/Nunito-Variable.woff2') format("woff2-variations");  
 } 
 
 /* In a previous iteration i used to include more Poppins fonts, however switching to this 'variations' version showed me I was only using 100 font weight*/
@@ -80,8 +81,8 @@ nav li > a {
 	font-family: 'Poppins';
 	font-style: normal;
 	font-weight: 100;
-	font-display:optional; 
-	src: local(''), url('/fonts/Poppins-Variable.woff2') format("woff");  
+	font-display: optional; 
+	src:  url('/fonts/Poppins-Variable.woff2') format("woff2-variations");  
 } 
 
 

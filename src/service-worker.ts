@@ -11,28 +11,21 @@ const CACHE = `cache-${version}`;
 const ASSETS = [...build, ...files];
 const STATIC_ASSETS = new Set(ASSETS);
 
-const isDev = import.meta.env.MODE === 'development'
-
+const isDev = import.meta.env.MODE === 'development';
 
 // listeners
 sw.addEventListener('install', (event: ExtendableEvent) => {
-
-	event.waitUntil(addFilesToCacheAndSkipWaiting())
-
-
+	event.waitUntil(addFilesToCacheAndSkipWaiting());
 });
 sw.addEventListener('activate', (event: ExtendableEvent) => {
-
-	event.waitUntil(deleteOldCachesAndClaimClients())
+	event.waitUntil(deleteOldCachesAndClaimClients());
 });
 
 // sw.addEventListener('fetch', handleCacheRequest);
 sw.addEventListener('fetch', handleCacheRequestWIP);
 
-
 // helpers
 async function addFilesToCacheAndSkipWaiting() {
-
 	const cache = await caches.open(CACHE);
 	await cache.addAll(ASSETS);
 	await sw.skipWaiting();
@@ -47,9 +40,6 @@ async function deleteOldCachesAndClaimClients() {
 	console.log('B: Delete old cache ');
 }
 
-
-
-
 function handleCacheRequestWIP(event: FetchEvent) {
 	// if (isDev) return // no caching in dev mode
 
@@ -60,11 +50,9 @@ function handleCacheRequestWIP(event: FetchEvent) {
 	const request = event.request;
 	if (request.method !== 'GET') return;
 
-
 	event.respondWith(respond());
 
 	async function respond() {
-
 		const cache = await caches.open(CACHE);
 
 		// `build`/`files` can always be served from the cache
@@ -93,13 +81,13 @@ function handleCacheRequestWIP(event: FetchEvent) {
 				cache.put(event.request, response.clone());
 			}
 
-			console.log(`Message 2: hit network ${url.pathname}`)
+			console.log(`Message 2: hit network ${url.pathname}`);
 			return response;
 		} catch (err) {
 			const response = await cache.match(request);
 
 			if (response) {
-				console.log(`Message 3: hit da cache box ${url.pathname}`)
+				console.log(`Message 3: hit da cache box ${url.pathname}`);
 				return response;
 			}
 
@@ -107,17 +95,19 @@ function handleCacheRequestWIP(event: FetchEvent) {
 			// as there is nothing we can do to respond to this request
 
 			// TESTING 1
-			return new Response('Oops there was an error. Try navigating back or come back again later.', {
-				status: 408, // khromov ??
-				headers: { 'Content-Type': 'text/html' }
-			});
+			return new Response(
+				'Oops there was an error. Try navigating back or come back again later.',
+				{
+					status: 408, // khromov ??
+					headers: { 'Content-Type': 'text/html' }
+				}
+			);
 
 			// TESTING 2
 			// throw err;
 
 			// TESTING 3
 			// error(404, 'Not found bro');
-
 
 			// TESTING 4
 			// return new Response('', {
@@ -126,93 +116,86 @@ function handleCacheRequestWIP(event: FetchEvent) {
 			// 		'Location': '/'
 			// 	}
 			// });
-
-
 		}
 	}
 }
 
+//async function fetchAndCache(request: Request) {
+//	const cache = await caches.open(`offline-${version}`);
+//	try {
+//		const response = await fetch(request);
+//
+//		if (!(response instanceof Response)) {
+//			throw new Error('invalid response from fetch');
+//		}
+//
+//		if (response.status === 200) {
+//			cache.put(request, response.clone());
+//		}
+//
+//		return response;
+//	} catch (err) {
+//		const response = await cache.match(request);
+//		if (response) return response;
+//
+//		throw err;
+//	}
+//}
 
-
-function handleCacheRequest(event: FetchEvent) {
-	const request = event.request;
-	const url = new URL(request.url);
-
-
-	const no_cachey = request.method !== 'GET'
-		|| request.headers.has('range')
-		|| url.pathname.startsWith('/api')
-
-	if (no_cachey) {
-		console.log('dont hit cache');
-		return
-	}
-
-
-	// don't try to handle e.g. data: URIs
-	const isHttp = url.protocol.startsWith('http');
-	const isDevServerRequest = import.meta.env.MODE === 'development'
-	// const isDevServerRequest = url.hostname === sw.location.hostname && url.port !== sw.location.port;
-	const isStaticAsset = url.host === sw.location.host && STATIC_ASSETS.has(url.pathname);
-	const skipBecauseUncached = request.cache === 'only-if-cached' && !isStaticAsset;
-
-
-	// for testing purposes
-	// if (!sw.navigator.onLine) {
-	// 	event.respondWith(serverGoBrrr());
-
-	// 	function serverGoBrrr() {
-	// 		console.log('offline bros .. server go brp')
-	// 		return new Response(`<html><body><h1>server go brrrrrrrr</h1></body></html>`, {
-	// 			status: 555,
-	// 			statusText: "Server Go Brrr Boi",
-	// 			headers: {
-	// 				"content-type": "text/html",
-	// 			}
-
-	// 		})
-	// 	}
-	// }
-	// for testing purposes
-
-	if (isHttp && !skipBecauseUncached) {
-		// if (isHttp && !isDevServerRequest && !skipBecauseUncached) {
-		console.log('hit cache');
-		event.respondWith(
-			(async () => {
-				// always serve static files and bundler-generated assets from cache.
-				// if your application has other URLs with data that will never change,
-				// set this variable to true for them and they will only be fetched once.
-				const cachedAsset = isStaticAsset && (await caches.match(request));
-
-				return cachedAsset || fetchAndCache(request);
-			})()
-		);
-	}
-
-
-}
-
-async function fetchAndCache(request: Request) {
-
-	const cache = await caches.open(`offline-${version}`);
-	try {
-		const response = await fetch(request);
-
-		if (!(response instanceof Response)) {
-			throw new Error('invalid response from fetch');
-		}
-
-		if (response.status === 200) {
-			cache.put(request, response.clone());
-
-		}
-
-		return response;
-	} catch (err) {
-		const response = await cache.match(request);
-		if (response) return response;
-
-		throw err;
-	}
-}
+//function handleCacheRequest(event: FetchEvent) {
+//	const request = event.request;
+//	const url = new URL(request.url);
+//
+//
+//	const no_cachey = request.method !== 'GET'
+//		|| request.headers.has('range')
+//		|| url.pathname.startsWith('/api')
+//
+//	if (no_cachey) {
+//		console.log('dont hit cache');
+//		return
+//	}
+//
+//
+//	// don't try to handle e.g. data: URIs
+//	const isHttp = url.protocol.startsWith('http');
+//	const isDevServerRequest = import.meta.env.MODE === 'development'
+//	// const isDevServerRequest = url.hostname === sw.location.hostname && url.port !== sw.location.port;
+//	const isStaticAsset = url.host === sw.location.host && STATIC_ASSETS.has(url.pathname);
+//	const skipBecauseUncached = request.cache === 'only-if-cached' && !isStaticAsset;
+//
+//
+//	// for testing purposes
+//	// if (!sw.navigator.onLine) {
+//	// 	event.respondWith(serverGoBrrr());
+//
+//	// 	function serverGoBrrr() {
+//	// 		console.log('offline bros .. server go brp')
+//	// 		return new Response(`<html><body><h1>server go brrrrrrrr</h1></body></html>`, {
+//	// 			status: 555,
+//	// 			statusText: "Server Go Brrr Boi",
+//	// 			headers: {
+//	// 				"content-type": "text/html",
+//	// 			}
+//
+//	// 		})
+//	// 	}
+//	// }
+//	// for testing purposes
+//
+//	if (isHttp && !skipBecauseUncached) {
+//		// if (isHttp && !isDevServerRequest && !skipBecauseUncached) {
+//		console.log('hit cache');
+//		event.respondWith(
+//			(async () => {
+//				// always serve static files and bundler-generated assets from cache.
+//				// if your application has other URLs with data that will never change,
+//				// set this variable to true for them and they will only be fetched once.
+//				const cachedAsset = isStaticAsset && (await caches.match(request));
+//
+//				return cachedAsset || fetchAndCache(request);
+//			})()
+//		);
+//	}
+//
+//}

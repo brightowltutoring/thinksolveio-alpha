@@ -15,7 +15,7 @@
 				return;
 			}
 			clearInterval(interval_id);
-			//window.location.href = google_meet_link;
+			window.location.href = google_meet_link;
 		}, 800);
 
 		return () => clearInterval(interval_id);
