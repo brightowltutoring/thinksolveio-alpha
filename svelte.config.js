@@ -12,7 +12,8 @@ export default {
 			'@': './src/*',
 			$routes: './src/routes',
 			$src: './src'
-		},
+		}
+		//routes: (route) => !route.id?.startsWith('/test')
 	},
 	vitePlugin: {
 		inspector: true

@@ -6,7 +6,9 @@
 <script lang="ts">
 	import { browser, dev } from '$app/environment';
 	import { BackgroundVideo } from '@/components/';
-	import { HomeworkPage, PlansPage, ReviewsPage } from '@/routes/';
+	import HomeworkPage from '@/routes/homework/+page.svelte';
+	import PlansPage from '@/routes/plans/+page.svelte';
+	import ReviewsPage from '@/routes/reviews/+page.svelte';
 	import { sleep } from '@/utils/';
 
 	// import ReviewsPage from '@/routes/reviews/Reviews.svelte';

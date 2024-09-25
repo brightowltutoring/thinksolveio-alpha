@@ -1,6 +1,7 @@
-se./worker.js
+./worker.js
 
 # custom 
+src/routes_temp
 **/*old*
 **/*-old.*
 **/*-experimental.*
@@ -8,10 +9,17 @@ src/**/*_old.*
 src/**/*-old.*
 src/**/old-*
 src/**/old_*
+src/**/old
+src/routes/old
+src/routes/test
+/old
+src/routes/test
+
 src/**/*-experimental.*
 src/**/*_experimental.*
 src/**/experimental-*
 src/**/experimental_*
+src/**/test
 
 /baas_googleCloudFunctions
 

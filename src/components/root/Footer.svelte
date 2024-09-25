@@ -1,6 +1,6 @@
 <script lang="ts">
-	// import FaqPage from '@/routes/faq/+page.svelte';
-	import { FaqPage } from '@/routes/';
+	import FaqPage from '@/routes/faq/+page.svelte';
+	//import { FaqPage } from '@/routes/';
 	// import Modal from '@/components/wrappers/Modal.svelte';
 	import { Modal } from '@/components/wrappers/';
 
@@ -71,9 +71,7 @@
 	>
 		<li>Email:</li>
 
-		<li class="p-5">
-			<a bind:this={emailText} href="mailto:thinksolve.io@gmail.com"> thinksolve.io@gmail.com </a>
-		</li>
+		<li class="p-5">thinksolve.io [at] gmail.com</li>
 	</ul>
 </Modal>
 
