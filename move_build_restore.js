@@ -9,24 +9,16 @@ const relPathToRoutes = 'src/routes';
 const routesDir = join(currentDir, relPathToRoutes);
 const tempRoutesDir = join(currentDir, `${relPathToRoutes}_temp`);
 
-// relative routes array has to be normalized
-const excludableRoutes = ['/test', '/pwa', '/stripe/old'].map((relativeRoute) => {
-	return join(routesDir, relativeRoute);
-});
+// relative routes array normalized to full path array
+const excludableRoutes = ['/test', '/pwa', '/stripe/old'].map((r) => join(routesDir, r));
 
-// Ensure the tempRoutesDir exists
-if (!existsSync(tempRoutesDir)) {
-	mkdirSync(tempRoutesDir, { recursive: true });
-}
-
-// Logic if built into separate scripts: node exclude.js && vite build && node restore.js
+// equivalent to "build":"node exclude.js && vite build && node restore.js" in package.json
 await excludeRoutes();
-console.log('Running the build command...');
 await build();
 await restoreRoutes();
 
 async function excludeRoutes() {
-	// Exclude the routes by moving them to routes_exclude
+	// Exclude the routes by moving them to routes_temp
 	for (const route of excludableRoutes) {
 		const srcPath = route;
 		const destPath = join(tempRoutesDir, srcPath.replace(routesDir, ''));
