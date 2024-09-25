@@ -5,11 +5,6 @@
 	"scripts": {
 		"dev": "vite dev --open",
 		"next": "pnpm i svelte@next",
-		"in": "mv src/routes/pwa/+page.svelte src/routes/pwa/page.svelte",
-		"out": "mv src/routes/pwa/page.svelte src/routes/pwa/+page.svelte",
-		"build1": "pnpm run in && vite build && pnpm run out",
-		"build2": "node claude_build_general.js",
-		"build3": "node claude_build_alt.js",
 		"build": "node move_build_restore.js",
 		"preview": "vite preview",
 		"bp": "vite build && vite preview",
