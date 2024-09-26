@@ -11,7 +11,7 @@ const CACHE = `cache-${version}`;
 const ASSETS = [...build, ...files];
 const STATIC_ASSETS = new Set(ASSETS);
 
-const isDev = import.meta.env.MODE === 'development';
+//const isDev = import.meta.env.MODE === 'development';
 
 // listeners
 sw.addEventListener('install', (event: ExtendableEvent) => {
