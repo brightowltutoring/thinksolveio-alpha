@@ -13,7 +13,22 @@
 	}
 
 	function updateIframeModalsOnce(node: HTMLAnchorElement) {
-		node.addEventListener('mouseenter', updateIframeModals, { once: true });
+		// IO implementation is minimal and gives better UX than
+		// mouseenter logic
+		const observer = new IntersectionObserver(
+			(entries) => {
+				if (entries[0].isIntersecting) {
+					updateIframeModals();
+					observer.disconnect();
+				}
+			},
+			{ rootMargin: '100px' }
+		);
+
+		observer.observe(node);
+
+		// // OLD CODE: now using intersectionObserver
+		//node.addEventListener('mouseenter', updateIframeModals, { once: true });
 
 		function updateIframeModals() {
 			if (thisIndex > -1) return;
@@ -25,6 +40,11 @@
 				name: props.button.url.split('/thinksolve/')[1].split('?')[0].split('-').join(' ')
 			});
 		}
+		return {
+			destroy() {
+				observer.disconnect();
+			}
+		};
 	}
 </script>
 
