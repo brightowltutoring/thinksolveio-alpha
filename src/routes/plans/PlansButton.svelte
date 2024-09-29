@@ -5,7 +5,6 @@
 	let props: { button: payButton; class: string } = $props();
 
 	let thisIndex = $derived(iframeModals.findIndex((el) => el.url === props.button.url));
-
 	function openPlansModal(e: MouseEvent) {
 		e.preventDefault();
 		iframeModals[thisIndex].isOpen = true;
@@ -50,6 +49,7 @@
 <svelte:head>
 	<link rel="preload" href={props.button.url} as="document" />
 </svelte:head>
+
 <a
 	use:updateIframeModalsOnce
 	href={props.button.url}

@@ -28,6 +28,7 @@
 		body
 		class="bg-[rgba(0,0,0,0.1)]"
 	>
+		<!--NOTE: with recent change to Modal.svelte, why is this suspense component still needed? -->
 		<Suspense loading={iframe.loading}>
 			<iframe
 				class="h-full w-full"

@@ -43,20 +43,16 @@
 	}
 </script>
 
-<!-- {#if !external}
-	<button onclick={()=> isOpen = true}>
-		open modal
-	</button>
-{/if} -->
-
-<!-- {#key body ? true : isOpen} -->
 {#key body === true || isOpen}
 	<modal-container
 		use:handleClose
-		class="fixed left-0 top-0 hidden h-full w-full items-center justify-center overflow-x-clip overflow-y-scroll text-center {_class} {isOpen &&
-			` z-50 !flex`}"
+		class="fixed left-0 top-0 flex h-full w-full items-center justify-center overflow-x-clip overflow-y-scroll text-center {_class} {isOpen
+			? 'z-50 opacity-100 transition-opacity duration-150 '
+			: '-z-50 opacity-0'}"
 	>
 		{@render children()}
 		<!-- <slot /> -->
 	</modal-container>
 {/key}
+
+<!-- NOTE: changed from  <modal-container class="other-classes hidden {isOpen && z-50 !flex`}"> since iframes would delay loading until modal state was true here; i.e. using opacity instead of hidden allows me to preload the iframe while visibily hidden -->
