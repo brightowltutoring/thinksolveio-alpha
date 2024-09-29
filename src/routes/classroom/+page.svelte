@@ -5,7 +5,11 @@
 
 	let { isAdmin = false } = $props();
 
-	let google_meet_link = 'https://meet.google.com/grt-fevp-hcs';
+	const meetLinks = {
+		thinksolve: 'mft-zruf-qio',
+		brightowl: 'grt-fevp-hcs'
+	};
+	let google_meet_link = `https://meet.google.com/${meetLinks.thinksolve}`;
 	let redirect_timer = $state(2);
 
 	$effect(() => {

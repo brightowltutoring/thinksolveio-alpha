@@ -1,4 +1,4 @@
-<script context="module" lang="ts">
+<script module lang="ts">
 	// store or pass via context?
 	export const iframeModals: iframeModalType[] = $state([]);
 
@@ -34,7 +34,7 @@
 				onload={() => iframeLoaded(iframe)}
 				src={iframe.url}
 				title={iframe.name}
-			/>
+			></iframe>
 		</Suspense>
 	</Modal>
 {/each}

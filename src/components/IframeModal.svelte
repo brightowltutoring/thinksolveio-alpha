@@ -1,3 +1,4 @@
+<!-- NOTE: bro this component isnt even being used -->
 <script context="module" lang="ts">
 	export type iframeModalType = {
 		url: string;
