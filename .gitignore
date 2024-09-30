@@ -2,11 +2,11 @@
 *
 
 # Track specific file types in the root directory
+!.gitignore
 !*.yaml
 !*.json
 !*.js
 !*.ts
-!.gitignore
 
 # Track everything in src and static directories
 !src/
