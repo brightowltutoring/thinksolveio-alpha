@@ -20,7 +20,7 @@
 					observer.disconnect();
 				}
 			},
-			{ rootMargin: '100px' }
+			{ rootMargin: '300px' }
 		);
 
 		observer.observe(node);

@@ -1,69 +1,22 @@
-./worker.js
+# Ignore everything
+*
 
-# custom 
-src/routes_temp
+# Track specific file types in the root directory
+!*.yaml
+!*.json
+!*.js
+!*.ts
+!.gitignore
+
+# Track everything in src and static directories
+!src/
+!src/**
+!static/
+!static/**
+
+# Ignore files and directories containing 'test' or 'old'
+**/*test*
 **/*old*
-**/*-old.*
-**/*-experimental.*
-src/**/*_old.*
-src/**/*-old.*
-src/**/old-*
-src/**/old_*
-src/**/old
-src/routes/old
-src/routes/test
-/old
-src/routes/test
 
-src/**/*-experimental.*
-src/**/*_experimental.*
-src/**/experimental-*
-src/**/experimental_*
-src/**/test
-
-/baas_googleCloudFunctions
-
-
-# standard stuff below
-
-!.env.example
-.env.*
-.env
-.DS_Store
-node_modules
-/build
-/.svelte-kit
-/package
-.output
-.vercel
-.vercel/output
-dist
-.vscode
-npm-debug.log
-yarn-error.log
-.nyc_output
-coverage
-coverage.lcov
-*.swp
-*.bak
-*.tgz
-packages/cli/src/util/dev/templates/*.ts
-packages/cli/src/util/constants.ts
-packages/cli/test/**/yarn.lock
-!packages/cli/test/dev/**/yarn.lock
-packages/cli/test/**/node_modules
-packages/cli/test/dev/fixtures/08-hugo/hugo
-packages/cli/test/dev/fixtures/**/dist
-packages/cli/test/dev/fixtures/**/public
-packages/cli/test/dev/fixtures/**/.now
-packages/cli/test/dev/fixtures/**/.vercel
-!packages/cli/test/fixtures/unit/commands/build/monorepo-detection/**/yarn.lock
-packages/cli/test/fixtures/integration
-test/lib/deployment/failed-page.txt
-.next
-/.env
-/public
-__pycache__
-.turbo
-.eslintcache
-turbo-cache-key.json
+# Ignore .DS_Store files
+**/.DS_Store
