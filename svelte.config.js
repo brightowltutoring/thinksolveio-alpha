@@ -14,10 +14,10 @@ export default {
 			$src: './src'
 		}
 		//routes: (route) => !route.id?.startsWith('/test')
-	},
-	vitePlugin: {
-		inspector: true
 	}
+	//vitePlugin: {
+	//	inspector: true
+	//}
 };
 
 // export default config;

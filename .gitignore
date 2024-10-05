@@ -4,6 +4,7 @@
 # Track specific file types in the root directory
 !.gitignore
 !*.yaml
+!*.lock
 !*.json
 !*.js
 !*.ts
@@ -16,9 +17,8 @@
 
 # Ignore 'old' directories at any level, or files like component.old.svelte, logic.old.js
 **/old/
-**/*.old.*
-
 **/test/
+**/*.old.*
 **/*.test.*
 
 # Ignore .DS_Store files
