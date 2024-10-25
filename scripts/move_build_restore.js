@@ -1,13 +1,18 @@
+// scripts/move_build_restore.js
+
 import { renameSync, existsSync, mkdirSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { build } from 'vite';
 
-const currentDir = dirname(fileURLToPath(import.meta.url)); // i.e. '/path/to/src_parent/thisfile.js' --> '/path/to/src_parent/'
+const currentDir = dirname(fileURLToPath(import.meta.url)); // this is now `scripts/` rather than root
+const rootDir = dirname(currentDir); 
+
 const relPathToRoutes = 'src/routes';
 
-const routesDir = join(currentDir, relPathToRoutes);
-const tempRoutesDir = join(currentDir, `${relPathToRoutes}_temp`);
+// had to change logic to use rootDir sine scripts no longer located in root dir
+const routesDir = join(rootDir, relPathToRoutes);
+const tempRoutesDir = join(rootDir, `${relPathToRoutes}_temp`);
 
 // relative routes array normalized to full path array
 const excludableRoutes = ['/test', '/pwa', '/stripe/old'].map((r) => join(routesDir, r));

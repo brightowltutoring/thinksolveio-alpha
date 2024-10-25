@@ -15,6 +15,9 @@
 !static/
 !static/**
 
+!scripts/
+!scripts/**/*.js
+
 # Ignore 'old' directories at any level, or files like component.old.svelte, logic.old.js
 **/old/
 **/test/

@@ -1,4 +1,6 @@
 <!-- This code has two streams: either does things the vanilla way or the component-slot way -->
+<svelte:options runes={false} />
+
 <script lang="ts">
 	import { onMount } from 'svelte';
 	let container: HTMLElement; // refers to container div of the <slot/>-component (i.e. when not using vanilla approach)

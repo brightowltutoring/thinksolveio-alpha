@@ -41,6 +41,43 @@
 			}
 		}
 	}
+	function handleClose2(node: HTMLElement) {
+		document.addEventListener('keydown', _close);
+		node.addEventListener('click', _close);
+
+		// some logic
+
+		return {
+			destroy() {
+				node.removeEventListener('click', _close);
+				document.removeEventListener('keydown', _close);
+			}
+		};
+		function _close(event: KeyboardEvent | MouseEvent) {
+			if (event.target === event.currentTarget || (event as KeyboardEvent).key === 'Escape') {
+				close();
+			}
+		}
+	}
+
+	function handleClose3(node: HTMLElement) {
+		on(document, 'keydown', _close);
+		on(node, 'click', _close);
+
+		// some logic
+
+		return {
+			destroy() {
+				node.removeEventListener('click', _close);
+				document.removeEventListener('keydown', _close);
+			}
+		};
+		function _close(event: KeyboardEvent | MouseEvent) {
+			if (event.target === event.currentTarget || (event as KeyboardEvent).key === 'Escape') {
+				close();
+			}
+		}
+	}
 </script>
 
 {#if trigger}
